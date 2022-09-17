@@ -57,3 +57,4 @@ if __name__ == "__main__":
     # print("Weights: ", weights)
     opt_value = optimal_value(capacity, weights, values)
     print("{:.10f}".format(opt_value))
+

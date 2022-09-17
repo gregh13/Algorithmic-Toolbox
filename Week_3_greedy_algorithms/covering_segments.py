@@ -4,6 +4,7 @@
 #       returns a list of the least number of points that include every segment.
 #       Note: Segments can be a single point (3, 3) and can repeat in the input
 
+
 from sys import stdin
 from collections import namedtuple
 

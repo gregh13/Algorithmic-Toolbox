@@ -11,3 +11,4 @@ print(n)
 # print(f"Seed number: {myseed}")
 
 print(' '.join([str(random.randint(0, n_range)) for i in range(n)]))
+
