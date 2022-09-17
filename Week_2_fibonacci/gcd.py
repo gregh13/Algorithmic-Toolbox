@@ -1,3 +1,4 @@
+# Greatest Common Divisor Problem
 
 # Goal: Design an algorithm that given an input of two numbers 'a' and 'b', returns their greatest common denominator
 #       *** Must not only be accurate, but fast. Even for very large inputs of 'n' (e.g. 100 trillion)
