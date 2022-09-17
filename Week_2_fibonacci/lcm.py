@@ -1,3 +1,4 @@
+# Least Common Multiple Problem
 
 # Goal: Design an algorithm that given an input of two numbers 'a' and 'b', returns their least common multiple
 #       *** Must not only be accurate, but fast. Even for very large inputs of 'n' (e.g. 100 trillion)
