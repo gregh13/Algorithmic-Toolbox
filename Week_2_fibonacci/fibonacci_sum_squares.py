@@ -1,3 +1,4 @@
+# Fibonacci Sum of Squares Problem (Last Digit)
 
 # Goal: Design an algorithm that given an input 'n', returns the last digit of the sum of squared terms in the Fibonacci
 #       sequence up to the 'nth' term. Ex: 5 --> 0+1+1+4+9+25 = 40 --> last digit = 0
