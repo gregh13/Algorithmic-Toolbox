@@ -1,3 +1,5 @@
+# Generic stress test random number template
+
 import random
 import sys
 
