@@ -1,3 +1,7 @@
+# Max Pairwise Product Problem
+
+# Goal: Design a simple algorithm that returns the greatest possible product of any two numbers in an array
+
 def max_pairwise_product(numbers):
     # My way
     first = max(numbers)
