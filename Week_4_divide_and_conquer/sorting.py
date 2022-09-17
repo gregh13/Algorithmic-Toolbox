@@ -1,7 +1,7 @@
 # Quick Sort and Quick3 Sort
 
 # Goal: Design an improved quick sort algorithm to handle cases with lots of duplicate values.
-#       The input is an array of integers that need to be sorted, returns the sorted array.
+#       The input is an unsorted array of integers, returns the sorted array (ascending order).
 
 
 from random import randint

@@ -3,6 +3,7 @@
 # Goal: Design a search algorithm that given an input of a list of integers, will check if there is a value that appears
 #       more than 50% of the time in the array (i.e. has the majority). Returns a 1 if true, 0 for false
 
+
 def majority_element_my_way(elements):
     # Can handle very large arrays
     # Similar to count sort, but more versatile as range of numbers doesn't need to be small or even known beforehand

@@ -1,7 +1,7 @@
 # Simple Binary Search Problem
 
 # Goal: Design a basic binary search algorithm that given inputs of a list of keys to sort through and queries to
-#       search, will return the index for the list of keys that holds the query. If not in list, returns -1
+#       search, will return the index for the list of keys that holds the query. If query not in list, returns -1
 
 
 def binary_search(keys, query):
