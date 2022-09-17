@@ -1,3 +1,4 @@
+# Fibonacci Last Digit of Sum Problem
 
 # Goal: Design an algorithm that given an input 'n', returns the last digit of the sum of terms in the Fibonacci
 #       sequence up to the 'nth' term. Ex: 5 --> 0+1+1+2+3+5 = 12 --> last digit = 2

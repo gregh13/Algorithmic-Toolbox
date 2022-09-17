@@ -1,3 +1,4 @@
+# Fibonacci Partial Sum Problem (Last Digit)
 
 # Goal: Design an algorithm that given an input of a range of two numbers, returns the last digit of the sum of terms
 #       in the Fibonacci sequence that occurs between the 'from' and the 'to' term. Ex: 5 8 --> sum of 5th to 8th term
