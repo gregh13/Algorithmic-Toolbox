@@ -11,26 +11,30 @@ def inversions_best(sequence):
         max_val = elements[0]
         min_val = elements[0]
         for i, value in enumerate(elements[1:]):
+            print("Value: ", value)
+            print("Min List: ", min_indices)
+            print("Max List: ", max_indices)
             if value < max_val:
                 if value < min_val:
                     min_val = value
-                    min_indices = [i]
+                    min_indices = [i+1]
                     continue
                 elif value == min_val:
-                    min_indices.append(i)
+                    min_indices.append(i+1)
                     continue
                 else:
                     continue
             elif value == max_val:
-                max_indices.append(i)
+                max_indices.append(i+1)
             else:
                 max_val = value
-                max_indices = [i]
+                max_indices = [i+1]
         return max_val, max_indices, min_val, min_indices
 
     inversions = 0
 
     while True:
+        print("Sequence: ", sequence)
         # Calculate the current max value and all the indices where the max is located
         max_val, max_index_list, min_val, min_index_list = calc_indices(sequence)
 
