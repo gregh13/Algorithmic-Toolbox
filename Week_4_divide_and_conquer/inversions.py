@@ -3,7 +3,7 @@ from itertools import combinations
 
 def inversions_best(sequence):
     def calc_indices(elements):
-        # Single pass to find all index values of the max value in a list
+        # Single pass to find all index values of the both the max and min value in a list
         if not elements:
             return 0, [], 0, []
         max_indices = [0]
@@ -76,15 +76,14 @@ def inversions_best(sequence):
             # Correct inversion count
             inversions -= correction_val
 
+        # Combine index lists to prepare for removal
+        all_indices = max_index_list + min_index_list
+        all_indices.sort(reverse=True)
 
-            # print("inversions POST_correction: ", inversions)
-
-        for _ in max_index_list:
+        # Del in reverse order so that the previous indices don't get affected
+        for index in all_indices:
             # Remove the current max value from the original sequence, preparing for next iteration with smaller list
-            sequence.remove(max_val)
-        for _ in min_index_list:
-            # Remove the current min value from the original sequence, preparing for next iteration with smaller list
-            sequence.remove(min_val)
+            del sequence[index]
 
 
 
@@ -169,7 +168,7 @@ if __name__ == '__main__':
     input_n = int(input())
     elements = list(map(int, input().split()))
     assert len(elements) == input_n
-    # print(inversions_naive(elements))
+    print(inversions_naive(elements))
     # print(inversions_better(elements))
     # print(inversions_better_elegant(elements))
     print(inversions_best(elements))
