@@ -9,10 +9,12 @@ def inversions_recursive_divide(sequence):
         lower_list = []
         higher_list = []
         pivot = sequence[0]
-        midpoint = 0
+        midpoint_1 = 0
+        midpoint_2 = 1
         print("\n START")
         print("Pivot: ", pivot)
-        print("Midpoint: ", midpoint)
+        print("Midpoint_1: ", midpoint_1)
+        print("Midpoint_2: ", midpoint_2)
         print("Lowers: ", lower_list)
         print("Highers: ", higher_list)
         print("Inversions: ", inversions)
@@ -21,17 +23,20 @@ def inversions_recursive_divide(sequence):
             val = sequence[i]
             if val < pivot:
                 lower_list.append(val)
-                inversions[0] += i - midpoint
-                midpoint += 1
+                inversions[0] += i - midpoint_1
+                midpoint_1 += 1
+                midpoint_2 += 1
             if val > pivot:
                 higher_list.append(val)
             if val == pivot:
-                inversions[0] += i - (midpoint + 1)
-                midpoint += 1
-            print("Value: ", val)
-            print("i: ", i)
+                inversions[0] += i - midpoint_2
+                midpoint_2 += 1
             print("Pivot: ", pivot)
-            print("Midpoint: ", midpoint)
+            print("Midpoint_1: ", midpoint_1)
+            print("Midpoint_2: ", midpoint_2)
+            print("Sequence: ", sequence)
+            print("i: ", i)
+            print("Value: ", val)
             print("Lowers: ", lower_list)
             print("Highers: ", higher_list)
             print("Inversions: ", inversions)
