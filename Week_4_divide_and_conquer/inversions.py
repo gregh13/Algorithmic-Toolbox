@@ -2,8 +2,78 @@ from itertools import combinations
 
 
 def inversions_best(sequence):
+    def calc_max_indices(elements):
+        # Single pass to find all index values of the max value in a list
+        if not elements:
+            return []
+        max_indices = []
+        min_indices = []
+        max_val = elements[0]
+        min_val = elements[0]
+        for i, value in enumerate(elements):
+            if value < max_val:
+                if value < min_val:
+                    min_val = value
+                    min_indices = [i]
+                    continue
+                elif value == min_val:
+                    min_indices.append(i)
+                    continue
+                else:
+                    continue
+            elif value == max_val:
+                max_indices.append(i)
+            else:
+                max_val = value
+                max_indices = [i]
+        return max_val, max_indices, min_val, min_indices
 
-    pass
+    inversions = 0
+
+    while True:
+        # Calculate the current max value and all the indices where the max is located
+        max_val, max_index_list, min_val, min_index_list = calc_max_indices(sequence)
+
+        # Used to calculate the number of inversion
+        seq_length = len(sequence)
+        max_index_length = len(max_index_list)
+        min_index_used = 0
+
+        # End check to exit while loop when all maxes have been accounted for
+        if seq_length <= max_index_length:
+            return inversions
+
+        for max_index_val in max_index_list:
+
+            # Subtract duplicates from sequence length, the get the range from max index to end of sequence
+            inversions += ((seq_length - max_index_length) - max_index_val)
+
+            # Prepare for next iteration
+            max_index_length -= 1
+
+        for min_index_val in min_index_list:
+            # Subtract duplicates from sequence length, the get the range from min index to end of sequence
+            inversions += (min_index_val - min_index_used)
+
+            # Prepare for next iteration
+            min_index_used += 1
+
+            # Calculate duplicate counts from above max_index iteration
+            correction_val = 0
+            for max_i in max_index_list:
+                if max_i < min_index_val:
+                    correction_val += 1
+
+            # Correct inversion count
+            inversions -= correction_val
+
+        for _ in max_index_list:
+            # Remove the current max value from the original sequence, preparing for next iteration with smaller list
+            sequence.remove(max_val)
+        for _ in min_index_list:
+            # Remove the current min value from the original sequence, preparing for next iteration with smaller list
+            sequence.remove(min_val)
+
 
 
 def inversions_better_elegant(sequence):
@@ -87,6 +157,6 @@ if __name__ == '__main__':
     input_n = int(input())
     elements = list(map(int, input().split()))
     assert len(elements) == input_n
-    # print(inversions_naive(elements))
+    print(inversions_naive(elements))
     # print(inversions_better(elements))
     print(inversions_better_elegant(elements))
