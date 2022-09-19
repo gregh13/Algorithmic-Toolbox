@@ -76,8 +76,15 @@ def inversions_best(sequence):
             # Correct inversion count
             inversions -= correction_val
 
-        # Use list comprehension to remove all instances of the value more efficiently
-        sequence = [val for val in sequence if val != max_val and val != min_val]
+
+            # print("inversions POST_correction: ", inversions)
+
+        for _ in max_index_list:
+            # Remove the current max value from the original sequence, preparing for next iteration with smaller list
+            sequence.remove(max_val)
+        for _ in min_index_list:
+            # Remove the current min value from the original sequence, preparing for next iteration with smaller list
+            sequence.remove(min_val)
 
 
 
@@ -143,10 +150,7 @@ def inversions_better(sequence):
             index_length -= 1
 
             # Remove the current max value from the original sequence, preparing for next iteration with smaller list
-            # sequence.remove(max_val)
-
-        # Use list comprehension to remove all instances of the value more efficiently
-        sequence = [val for val in sequence if val != max_val]
+            sequence.remove(max_val)
 
 
 def inversions_naive(a):
@@ -166,6 +170,6 @@ if __name__ == '__main__':
     elements = list(map(int, input().split()))
     assert len(elements) == input_n
     # print(inversions_naive(elements))
-    print(inversions_better(elements))
+    # print(inversions_better(elements))
     # print(inversions_better_elegant(elements))
-    # print(inversions_best(elements))
+    print(inversions_best(elements))
