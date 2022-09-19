@@ -2,7 +2,17 @@ from itertools import combinations
 
 
 def inversions_best(sequence):
-    pass
+    number_dict = {}
+    inversions = 0
+    for val in sequence:
+        for key in number_dict:
+            if key > val:
+                inversions += number_dict[key]
+        if val in number_dict:
+            number_dict[val] += 1
+        else:
+            number_dict[val] = 1
+    return inversions
 
 
 def inversions_better(sequence):
@@ -71,4 +81,5 @@ if __name__ == '__main__':
     elements = list(map(int, input().split()))
     assert len(elements) == input_n
     print(inversions_naive(elements))
-    print(inversions_better(elements))
+    # print(inversions_better(elements))
+    print(inversions_best(elements))
