@@ -1,9 +1,10 @@
 from itertools import combinations
-from random import randint
+# from random import randint
 
 
 def inversions_recursive_divide(sequence):
     def divide_and_conquer(sequence):
+        global inversions
         if not sequence:
             return
         lower_list = []
@@ -11,199 +12,180 @@ def inversions_recursive_divide(sequence):
         pivot = sequence[0]
         midpoint_1 = 0
         midpoint_2 = 1
-        # print("\n START")
-        # print("Pivot: ", pivot)
-        # print("Midpoint_1: ", midpoint_1)
-        # print("Midpoint_2: ", midpoint_2)
-        # print("Lowers: ", lower_list)
-        # print("Highers: ", higher_list)
-        # print("Inversions: ", inversions)
-        # print("---------------")
         for i in range(1, len(sequence)):
             val = sequence[i]
             if val < pivot:
                 lower_list.append(val)
-                inversions[0] += i - midpoint_1
+                inversions += i - midpoint_1
                 midpoint_1 += 1
                 midpoint_2 += 1
             elif val > pivot:
                 higher_list.append(val)
             else:
-                inversions[0] += i - midpoint_2
+                inversions += i - midpoint_2
                 midpoint_2 += 1
-            # print("Pivot: ", pivot)
-            # print("Midpoint_1: ", midpoint_1)
-            # print("Midpoint_2: ", midpoint_2)
-            # print("Sequence: ", sequence)
-            # print("i: ", i)
-            # print("Value: ", val)
-            # print("Lowers: ", lower_list)
-            # print("Highers: ", higher_list)
-            # print("Inversions: ", inversions)
-            # print("---------------")
-
         divide_and_conquer(lower_list)
         divide_and_conquer(higher_list)
 
-    inversions = [0]
+    # inversions = 0
     divide_and_conquer(sequence)
-    return inversions[0]
-
-
-
-def inversions_best(sequence):
-    def calc_indices(elements):
-        # Single pass to find all index values of the both the max and min value in a list
-        if not elements:
-            return 0, [], 0, []
-        max_indices = [0]
-        min_indices = [0]
-        max_val = elements[0]
-        min_val = elements[0]
-        for i, value in enumerate(elements[1:]):
-            # print("Value: ", value)
-            # print("Min List: ", min_indices)
-            # print("Max List: ", max_indices)
-            if value < max_val:
-                if value < min_val:
-                    min_val = value
-                    min_indices = [i+1]
-                    continue
-                elif value == min_val:
-                    min_indices.append(i+1)
-                    continue
-                else:
-                    continue
-            elif value == max_val:
-                max_indices.append(i+1)
-            else:
-                max_val = value
-                max_indices = [i+1]
-        return max_val, max_indices, min_val, min_indices
-
-    inversions = 0
-
-    while True:
-        # print("Sequence: ", sequence)
-        # Calculate the current max value and all the indices where the max is located
-        max_val, max_index_list, min_val, min_index_list = calc_indices(sequence)
-
-        # Used to calculate the number of inversion
-        seq_length = len(sequence)
-        max_index_length = len(max_index_list)
-        min_index_used = 0
-
-        # End check to exit while loop when all maxes have been accounted for
-        if seq_length <= max_index_length:
-            return inversions
-
-        for max_index_val in max_index_list:
-            # print("MAX LOOOP")
-            # Subtract duplicates from sequence length, the get the range from max index to end of sequence
-            inversions += ((seq_length - max_index_length) - max_index_val)
-
-            # print("inversions: ", inversions)
-            # Prepare for next iteration
-            max_index_length -= 1
-
-        # print(min_index_list)
-        for min_index_val in min_index_list:
-            # print("\nMIN LOOOP")
-
-            # Subtract duplicates from sequence length, the get the range from min index to end of sequence
-            inversions += (min_index_val - min_index_used)
-
-            # print("inversions pre_correction: ", inversions)
-            # Prepare for next iteration
-            min_index_used += 1
-
-            # Calculate duplicate counts from above max_index iteration
-            correction_val = 0
-            for max_i in max_index_list:
-                if max_i < min_index_val:
-                    correction_val += 1
-
-            # Correct inversion count
-            inversions -= correction_val
-
-        # Combine index lists to prepare for removal
-        all_indices = max_index_list + min_index_list
-        all_indices.sort(reverse=True)
-
-        # Del in reverse order so that the previous indices don't get affected
-        for index in all_indices:
-            # Remove the current max value from the original sequence, preparing for next iteration with smaller list
-            del sequence[index]
-
-
-
-def inversions_better_elegant(sequence):
-    # More elegant algorithm, but runs around same time as earlier algorithm. Not fast enough for large input sequences
-    number_dict = {}
-    inversions = 0
-    for val in sequence:
-        print(sorted(number_dict.keys()))
-        for key in number_dict:
-            if key > val:
-                inversions += number_dict[key]
-        if val in number_dict:
-            number_dict[val] += 1
-        else:
-            number_dict[val] = 1
     return inversions
 
-
-def inversions_better(sequence):
-    # Correct and more efficient than naive, but not fast enough for large input sequences
-    def calc_max_indices(elements):
-        # Single pass to find all index values of the max value in a list
-        if not elements:
-            return []
-        max_indices = []
-        max = elements[0]
-        for i, value in enumerate(elements):
-            if value < max:
-                continue
-            elif value == max:
-                max_indices.append(i)
-            else:
-                max = value
-                max_indices = [i]
-        return max, max_indices
-
-    # Initialize inversion count
-    inversions = 0
-
-    while True:
-        # Calculate the current max value and all the indices where the max is located
-        max_val, max_index_list = calc_max_indices(sequence)
-
-        # Used to calculate the number of inversion
-        seq_length = len(sequence)
-        index_length = len(max_index_list)
-
-        # End check to exit while loop when all maxes have been accounted for
-        if seq_length <= index_length:
-            return inversions
-
-        for index_val in max_index_list:
-            # print(f"Max_val: ", max_val)
-            # print(f"Max_index_list: ", max_index_list)
-            # print(f"Sequence: ", sequence)
-            # print(f"Inversions: ", inversions)
-
-            # Subtract duplicates from sequence length, the get the range from max index to end of sequence
-            inversions += ((seq_length - index_length) - index_val)
-
-            # Prepare for next iteration
-            index_length -= 1
-
-        # # Remove the current max value from the original sequence, preparing for next iteration with smaller list
-        # sequence.remove(max_val)
-
-        for index in reversed(max_index_list):
-            del sequence[index]
-
+#
+#
+# def inversions_best(sequence):
+#     def calc_indices(elements):
+#         # Single pass to find all index values of the both the max and min value in a list
+#         if not elements:
+#             return 0, [], 0, []
+#         max_indices = [0]
+#         min_indices = [0]
+#         max_val = elements[0]
+#         min_val = elements[0]
+#         for i, value in enumerate(elements[1:]):
+#             # print("Value: ", value)
+#             # print("Min List: ", min_indices)
+#             # print("Max List: ", max_indices)
+#             if value < max_val:
+#                 if value < min_val:
+#                     min_val = value
+#                     min_indices = [i+1]
+#                     continue
+#                 elif value == min_val:
+#                     min_indices.append(i+1)
+#                     continue
+#                 else:
+#                     continue
+#             elif value == max_val:
+#                 max_indices.append(i+1)
+#             else:
+#                 max_val = value
+#                 max_indices = [i+1]
+#         return max_val, max_indices, min_val, min_indices
+#
+#     inversions = 0
+#
+#     while True:
+#         # print("Sequence: ", sequence)
+#         # Calculate the current max value and all the indices where the max is located
+#         max_val, max_index_list, min_val, min_index_list = calc_indices(sequence)
+#
+#         # Used to calculate the number of inversion
+#         seq_length = len(sequence)
+#         max_index_length = len(max_index_list)
+#         min_index_used = 0
+#
+#         # End check to exit while loop when all maxes have been accounted for
+#         if seq_length <= max_index_length:
+#             return inversions
+#
+#         for max_index_val in max_index_list:
+#             # print("MAX LOOOP")
+#             # Subtract duplicates from sequence length, the get the range from max index to end of sequence
+#             inversions += ((seq_length - max_index_length) - max_index_val)
+#
+#             # print("inversions: ", inversions)
+#             # Prepare for next iteration
+#             max_index_length -= 1
+#
+#         # print(min_index_list)
+#         for min_index_val in min_index_list:
+#             # print("\nMIN LOOOP")
+#
+#             # Subtract duplicates from sequence length, the get the range from min index to end of sequence
+#             inversions += (min_index_val - min_index_used)
+#
+#             # print("inversions pre_correction: ", inversions)
+#             # Prepare for next iteration
+#             min_index_used += 1
+#
+#             # Calculate duplicate counts from above max_index iteration
+#             correction_val = 0
+#             for max_i in max_index_list:
+#                 if max_i < min_index_val:
+#                     correction_val += 1
+#
+#             # Correct inversion count
+#             inversions -= correction_val
+#
+#         # Combine index lists to prepare for removal
+#         all_indices = max_index_list + min_index_list
+#         all_indices.sort(reverse=True)
+#
+#         # Del in reverse order so that the previous indices don't get affected
+#         for index in all_indices:
+#             # Remove the current max value from the original sequence, preparing for next iteration with smaller list
+#             del sequence[index]
+#
+#
+#
+# def inversions_better_elegant(sequence):
+#     # More elegant algorithm, but runs around same time as earlier algorithm. Not fast enough for large input sequences
+#     number_dict = {}
+#     inversions = 0
+#     for val in sequence:
+#         print(sorted(number_dict.keys()))
+#         for key in number_dict:
+#             if key > val:
+#                 inversions += number_dict[key]
+#         if val in number_dict:
+#             number_dict[val] += 1
+#         else:
+#             number_dict[val] = 1
+#     return inversions
+#
+#
+# def inversions_better(sequence):
+#     # Correct and more efficient than naive, but not fast enough for large input sequences
+#     def calc_max_indices(elements):
+#         # Single pass to find all index values of the max value in a list
+#         if not elements:
+#             return []
+#         max_indices = []
+#         max = elements[0]
+#         for i, value in enumerate(elements):
+#             if value < max:
+#                 continue
+#             elif value == max:
+#                 max_indices.append(i)
+#             else:
+#                 max = value
+#                 max_indices = [i]
+#         return max, max_indices
+#
+#     # Initialize inversion count
+#     inversions = 0
+#
+#     while True:
+#         # Calculate the current max value and all the indices where the max is located
+#         max_val, max_index_list = calc_max_indices(sequence)
+#
+#         # Used to calculate the number of inversion
+#         seq_length = len(sequence)
+#         index_length = len(max_index_list)
+#
+#         # End check to exit while loop when all maxes have been accounted for
+#         if seq_length <= index_length:
+#             return inversions
+#
+#         for index_val in max_index_list:
+#             # print(f"Max_val: ", max_val)
+#             # print(f"Max_index_list: ", max_index_list)
+#             # print(f"Sequence: ", sequence)
+#             # print(f"Inversions: ", inversions)
+#
+#             # Subtract duplicates from sequence length, the get the range from max index to end of sequence
+#             inversions += ((seq_length - index_length) - index_val)
+#
+#             # Prepare for next iteration
+#             index_length -= 1
+#
+#         # # Remove the current max value from the original sequence, preparing for next iteration with smaller list
+#         # sequence.remove(max_val)
+#
+#         for index in reversed(max_index_list):
+#             del sequence[index]
+#
 
 def inversions_naive(a):
     number_of_inversions = 0
@@ -221,8 +203,9 @@ if __name__ == '__main__':
     input_n = int(input())
     elements = list(map(int, input().split()))
     assert len(elements) == input_n
-    print(inversions_naive(elements))
+    # print(inversions_naive(elements))
     # print(inversions_better(elements))
     # print(inversions_better_elegant(elements))
     # print(inversions_best(elements))
+    inversions = 0
     print(inversions_recursive_divide(elements))
