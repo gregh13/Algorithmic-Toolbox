@@ -2,64 +2,48 @@ from itertools import combinations
 from random import randint
 
 
-def inversions_quick3_sort_way(sequence):
-    def partition3(array, left, right, inversions):
-        # My implementation of the Quick3 sorting algorithm
-        print("\nNew Batch")
-        mid_1 = left  # left bound of same block
-        mid_2 = left + 1  # right bound of same block
-        pivot = array[left]
-        for i in range(left, right):
-            # Debugging statements
+def inversions_recursive_divide(sequence):
+    def divide_and_conquer(sequence):
+        if not sequence:
+            return
+        lower_list = []
+        higher_list = []
+        pivot = sequence[0]
+        midpoint = 0
+        print("\n START")
+        print("Pivot: ", pivot)
+        print("Midpoint: ", midpoint)
+        print("Lowers: ", lower_list)
+        print("Highers: ", higher_list)
+        print("Inversions: ", inversions)
+        print("---------------")
+        for i in range(1, len(sequence)):
+            val = sequence[i]
+            if val < pivot:
+                lower_list.append(val)
+                inversions[0] += i - midpoint
+                midpoint += 1
+            if val > pivot:
+                higher_list.append(val)
+            if val == pivot:
+                inversions[0] += i - (midpoint + 1)
+                midpoint += 1
+            print("Value: ", val)
+            print("i: ", i)
             print("Pivot: ", pivot)
-            print("Mid_1: ", mid_1)
-            print("Mid_2: ", mid_2)
-            print("array[i+1]: ", array[i+1])
-            print("Array Before: ", array[left:right+1])
-            print("Inversions Before: ", inversions)
-            if array[i + 1] == pivot:
-                # Swap items
-                array[mid_2], array[i + 1] = array[i + 1], array[mid_2]
-
-                # Update inversions
-                inversions[0] += (i + 1) - mid_2
-
-                # Prepare for next iteration
-                mid_2 += 1
-            if array[i + 1] < pivot:
-                # Found number less than pivot element, perform swap to add block to "smaller than" section
-                array[mid_1], array[i + 1] = array[i + 1], array[mid_1]
-
-                # Update inversions
-                inversions[0] += (i + 1) - mid_1
-
-                # Swap again to return the duplicate pivot value back
-                array[mid_2], array[i + 1] = array[i + 1], array[mid_2]
-                # Update the index for the mid-block
-                mid_1 += 1
-                mid_2 += 1
-            print("Array After:  ", array[left:right+1])
-            print("Inversions After: ", inversions)
+            print("Midpoint: ", midpoint)
+            print("Lowers: ", lower_list)
+            print("Highers: ", higher_list)
+            print("Inversions: ", inversions)
             print("---------------")
 
-        return mid_1, mid_2
+        divide_and_conquer(lower_list)
+        divide_and_conquer(higher_list)
 
-    def randomized_quick_sort(array, left, right, inversions):
-        if left >= right:
-            return
-        k = randint(left, right)
-        # swap random index to the start of list as the pivot element
-        array[left], array[k] = array[k], array[left]
-        m1, m2 = partition3(array, left, right, inversions)
-        randomized_quick_sort(array, left, m1, inversions)
-        randomized_quick_sort(array, m2, right, inversions)
-
-    # Initialize inversions - use value inside array for better manipulation within local function scopes
     inversions = [0]
-
-    # Call recursive function
-    randomized_quick_sort(sequence, 0, len(sequence) - 1, inversions)
+    divide_and_conquer(sequence)
     return inversions[0]
+
 
 
 def inversions_best(sequence):
@@ -235,4 +219,5 @@ if __name__ == '__main__':
     print(inversions_naive(elements))
     # print(inversions_better(elements))
     # print(inversions_better_elegant(elements))
-    print(inversions_best(elements))
+    # print(inversions_best(elements))
+    print(inversions_recursive_divide(elements))
