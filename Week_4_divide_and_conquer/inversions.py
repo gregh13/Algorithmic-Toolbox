@@ -17,6 +17,19 @@ def inversions_better(sequence):
                 max = value
                 max_indices = [i]
         return max_indices
+    inversions = 0
+    max_index_list = calc_max_indices(sequence)
+    seq_length = len(sequence)
+    index_length = len(max_index_list)
+    multiplier = 1
+    for index_val in max_index_list:
+        # Remove current iteration from list length
+        index_length -= 1
+        # Sub 1 from seq_len to account for index/len issue, check range from index_val to end of seq, minus duplicates
+        inversions += (seq_length - 1) - ((index_val - index_length) * multiplier)
+        # Multiplier accounts for previous max values that would create an inversion in subsequent ranges in sequence
+        multiplier += 1
+
 
 
 
