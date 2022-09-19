@@ -1,7 +1,12 @@
 from itertools import combinations
 
 
+def inversions_best(sequence):
+    pass
+
+
 def inversions_better(sequence):
+    # Correct and accurate, but not fast enough for large inputs
     def calc_max_indices(elements):
         # Single pass to find all index values of the max value in a list
         if not elements:
@@ -34,10 +39,10 @@ def inversions_better(sequence):
             return inversions
 
         for index_val in max_index_list:
-            print(f"Max_val: ", max_val)
-            print(f"Max_index_list: ", max_index_list)
-            print(f"Sequence: ", sequence)
-            print(f"Inversions: ", inversions)
+            # print(f"Max_val: ", max_val)
+            # print(f"Max_index_list: ", max_index_list)
+            # print(f"Sequence: ", sequence)
+            # print(f"Inversions: ", inversions)
 
             # Subtract duplicates from sequence length, the get the range from max index to end of sequence
             inversions += ((seq_length - index_length) - index_val)
