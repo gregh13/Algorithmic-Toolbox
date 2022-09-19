@@ -11,14 +11,14 @@ def inversions_recursive_divide(sequence):
         pivot = sequence[0]
         midpoint_1 = 0
         midpoint_2 = 1
-        print("\n START")
-        print("Pivot: ", pivot)
-        print("Midpoint_1: ", midpoint_1)
-        print("Midpoint_2: ", midpoint_2)
-        print("Lowers: ", lower_list)
-        print("Highers: ", higher_list)
-        print("Inversions: ", inversions)
-        print("---------------")
+        # print("\n START")
+        # print("Pivot: ", pivot)
+        # print("Midpoint_1: ", midpoint_1)
+        # print("Midpoint_2: ", midpoint_2)
+        # print("Lowers: ", lower_list)
+        # print("Highers: ", higher_list)
+        # print("Inversions: ", inversions)
+        # print("---------------")
         for i in range(1, len(sequence)):
             val = sequence[i]
             if val < pivot:
@@ -26,21 +26,21 @@ def inversions_recursive_divide(sequence):
                 inversions[0] += i - midpoint_1
                 midpoint_1 += 1
                 midpoint_2 += 1
-            if val > pivot:
+            elif val > pivot:
                 higher_list.append(val)
-            if val == pivot:
+            else:
                 inversions[0] += i - midpoint_2
                 midpoint_2 += 1
-            print("Pivot: ", pivot)
-            print("Midpoint_1: ", midpoint_1)
-            print("Midpoint_2: ", midpoint_2)
-            print("Sequence: ", sequence)
-            print("i: ", i)
-            print("Value: ", val)
-            print("Lowers: ", lower_list)
-            print("Highers: ", higher_list)
-            print("Inversions: ", inversions)
-            print("---------------")
+            # print("Pivot: ", pivot)
+            # print("Midpoint_1: ", midpoint_1)
+            # print("Midpoint_2: ", midpoint_2)
+            # print("Sequence: ", sequence)
+            # print("i: ", i)
+            # print("Value: ", val)
+            # print("Lowers: ", lower_list)
+            # print("Highers: ", higher_list)
+            # print("Inversions: ", inversions)
+            # print("---------------")
 
         divide_and_conquer(lower_list)
         divide_and_conquer(higher_list)
