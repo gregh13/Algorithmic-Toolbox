@@ -2,15 +2,15 @@ from itertools import combinations
 
 
 def inversions_best(sequence):
-    def calc_max_indices(elements):
+    def calc_indices(elements):
         # Single pass to find all index values of the max value in a list
         if not elements:
-            return []
-        max_indices = []
-        min_indices = []
+            return 0, [], 0, []
+        max_indices = [0]
+        min_indices = [0]
         max_val = elements[0]
         min_val = elements[0]
-        for i, value in enumerate(elements):
+        for i, value in enumerate(elements[1:]):
             if value < max_val:
                 if value < min_val:
                     min_val = value
@@ -32,7 +32,7 @@ def inversions_best(sequence):
 
     while True:
         # Calculate the current max value and all the indices where the max is located
-        max_val, max_index_list, min_val, min_index_list = calc_max_indices(sequence)
+        max_val, max_index_list, min_val, min_index_list = calc_indices(sequence)
 
         # Used to calculate the number of inversion
         seq_length = len(sequence)
@@ -44,17 +44,22 @@ def inversions_best(sequence):
             return inversions
 
         for max_index_val in max_index_list:
-
+            print("MAX LOOOP")
             # Subtract duplicates from sequence length, the get the range from max index to end of sequence
             inversions += ((seq_length - max_index_length) - max_index_val)
 
+            print("inversions: ", inversions)
             # Prepare for next iteration
             max_index_length -= 1
 
+        print(min_index_list)
         for min_index_val in min_index_list:
+            print("\nMIN LOOOP")
+
             # Subtract duplicates from sequence length, the get the range from min index to end of sequence
             inversions += (min_index_val - min_index_used)
 
+            print("inversions pre_correction: ", inversions)
             # Prepare for next iteration
             min_index_used += 1
 
@@ -66,6 +71,9 @@ def inversions_best(sequence):
 
             # Correct inversion count
             inversions -= correction_val
+
+
+            print("inversions POST_correction: ", inversions)
 
         for _ in max_index_list:
             # Remove the current max value from the original sequence, preparing for next iteration with smaller list
@@ -159,4 +167,5 @@ if __name__ == '__main__':
     assert len(elements) == input_n
     print(inversions_naive(elements))
     # print(inversions_better(elements))
-    print(inversions_better_elegant(elements))
+    # print(inversions_better_elegant(elements))
+    print(inversions_best(elements))
