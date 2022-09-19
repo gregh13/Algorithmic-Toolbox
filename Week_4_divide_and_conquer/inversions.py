@@ -2,9 +2,16 @@ from itertools import combinations
 
 
 def inversions_best(sequence):
+
+    pass
+
+
+def inversions_better_elegant(sequence):
+    # More elegant algorithm, but runs around same time as earlier algorithm. Not fast enough for large input sequences
     number_dict = {}
     inversions = 0
     for val in sequence:
+        print(sorted(number_dict.keys()))
         for key in number_dict:
             if key > val:
                 inversions += number_dict[key]
@@ -16,7 +23,7 @@ def inversions_best(sequence):
 
 
 def inversions_better(sequence):
-    # Correct and accurate, but not fast enough for large inputs
+    # Correct and more efficient than naive, but not fast enough for large input sequences
     def calc_max_indices(elements):
         # Single pass to find all index values of the max value in a list
         if not elements:
@@ -80,6 +87,6 @@ if __name__ == '__main__':
     input_n = int(input())
     elements = list(map(int, input().split()))
     assert len(elements) == input_n
-    print(inversions_naive(elements))
+    # print(inversions_naive(elements))
     # print(inversions_better(elements))
-    print(inversions_best(elements))
+    print(inversions_better_elegant(elements))
