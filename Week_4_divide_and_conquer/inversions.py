@@ -4,7 +4,6 @@ from itertools import combinations
 
 def inversions_recursive_divide(sequence):
     def divide_and_conquer(sequence):
-        global inversions
         if not sequence:
             return
         lower_list = []
@@ -16,18 +15,18 @@ def inversions_recursive_divide(sequence):
             val = sequence[i]
             if val < pivot:
                 lower_list.append(val)
-                inversions += i - midpoint_1
+                inversions[0] += i - midpoint_1
                 midpoint_1 += 1
                 midpoint_2 += 1
             elif val > pivot:
                 higher_list.append(val)
             else:
-                inversions += i - midpoint_2
+                inversions[0] += i - midpoint_2
                 midpoint_2 += 1
         divide_and_conquer(lower_list)
         divide_and_conquer(higher_list)
 
-    # inversions = 0
+    inversions = [0]
     divide_and_conquer(sequence)
     return inversions
 
@@ -207,5 +206,4 @@ if __name__ == '__main__':
     # print(inversions_better(elements))
     # print(inversions_better_elegant(elements))
     # print(inversions_best(elements))
-    inversions = 0
     print(inversions_recursive_divide(elements))
