@@ -23,16 +23,20 @@ def inversions_recursive_divide(sequence):
             else:
                 inversions[0] += i - midpoint_2
                 midpoint_2 += 1
-        divide_and_conquer(lower_list)
-        divide_and_conquer(higher_list)
+
+        if len(lower_list) < len(higher_list):
+            divide_and_conquer(lower_list)
+            divide_and_conquer(higher_list)
+        else:
+            divide_and_conquer(higher_list)
+            divide_and_conquer(lower_list)
 
     inversions = [0]
     divide_and_conquer(sequence)
-    return inversions
+    return inversions[0]
 
-#
-#
-# def inversions_best(sequence):
+
+# def inversions_second_best(sequence):
 #     def calc_indices(elements):
 #         # Single pass to find all index values of the both the max and min value in a list
 #         if not elements:
@@ -205,5 +209,6 @@ if __name__ == '__main__':
     # print(inversions_naive(elements))
     # print(inversions_better(elements))
     # print(inversions_better_elegant(elements))
-    # print(inversions_best(elements))
+    # print(inversions_second_best(elements))
+
     print(inversions_recursive_divide(elements))
