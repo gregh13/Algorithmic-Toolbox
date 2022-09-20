@@ -4,7 +4,7 @@ from sys import stdin
 def points_dict(starts, ends, points):
     len_start = len(starts)
     assert len_start == len(ends)
-    count = []
+    count = [0] * len(points)
     dictionary = {}
 
     for i in range(len_start):
@@ -14,11 +14,10 @@ def points_dict(starts, ends, points):
             else:
                 dictionary[val] += 1
 
-    for point in points:
-        if point not in dictionary:
-            count.append(0)
-        else:
-            count.append(dictionary[point])
+    for index, point in enumerate(points):
+        if point in dictionary:
+            count[index] = dictionary[point]
+
     return count
 
 
@@ -51,13 +50,9 @@ def points_cover_naive(starts, ends, points):
 
 if __name__ == '__main__':
     data = list(map(int, stdin.read().split()))
-    # data = list(map(int, input().split()))
     n, m = data[0], data[1]
     input_starts, input_ends = data[2:2 * n + 2:2], data[3:2 * n + 2:2]
     input_points = data[2 * n + 2:]
-    #
-    # output_count1 = points_cover_naive(input_starts, input_ends, input_points)
-    # print(*output_count1)
-    # output_count = points_naive_better(input_starts, input_ends, input_points)
+
     output_count = points_dict(input_starts, input_ends, input_points)
     print(*output_count)
