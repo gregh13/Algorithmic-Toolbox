@@ -15,10 +15,10 @@ def points_dict(starts, ends, points):
                 dictionary[val] += 1
 
     for point in points:
-        try:
-            count.append(dictionary[point])
-        except KeyError:
+        if point not in dictionary:
             count.append(0)
+        else:
+            count.append(dictionary[point])
     return count
 
 
@@ -50,8 +50,8 @@ def points_cover_naive(starts, ends, points):
 
 
 if __name__ == '__main__':
-    # data = list(map(int, stdin.read().split()))
-    data = list(map(int, input().split()))
+    data = list(map(int, stdin.read().split()))
+    # data = list(map(int, input().split()))
     n, m = data[0], data[1]
     input_starts, input_ends = data[2:2 * n + 2:2], data[3:2 * n + 2:2]
     input_points = data[2 * n + 2:]
