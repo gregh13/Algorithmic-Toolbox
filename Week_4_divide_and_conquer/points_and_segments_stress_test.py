@@ -31,7 +31,7 @@ for i in range(tests):
 
     temp = open("input.txt", 'r').read().splitlines()
     all_inputs = ' '.join(temp)
-    print(all_inputs)
+    # print(all_inputs)
     with open('input.txt', 'w') as f:
         f.write(all_inputs)
 
@@ -50,7 +50,8 @@ for i in range(tests):
     # Read the output of the naive solution:
     with open('naive.txt') as f:
         naive = f.read()
-    print("Naive : ", naive)
+    print("Naive: ", naive)
     if model != naive:
+        print("\nBROKEN\n")
         break
 
