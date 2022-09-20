@@ -1,6 +1,27 @@
 from sys import stdin
 
 
+def points_dict(starts, ends, points):
+    len_start = len(starts)
+    assert len_start == len(ends)
+    count = []
+    dictionary = {}
+
+    for i in range(len_start):
+        for val in range(starts[i], ends[i] + 1):
+            try:
+                dictionary[val] += 1
+            except KeyError:
+                dictionary[val] = 1
+
+    for point in points:
+        try:
+            count.append(dictionary[point])
+        except KeyError:
+            count.append(0)
+    return count
+
+
 def points_naive_better(starts, ends, points):
     assert len(starts) == len(ends)
     count = [0] * len(points)
@@ -35,5 +56,6 @@ if __name__ == '__main__':
     input_points = data[2 * n + 2:]
 
     # output_count = points_cover_naive(input_starts, input_ends, input_points)
-    output_count = points_naive_better(input_starts, input_ends, input_points)
+    # output_count = points_naive_better(input_starts, input_ends, input_points)
+    output_count = points_dict(input_starts, input_ends, input_points)
     print(*output_count)
