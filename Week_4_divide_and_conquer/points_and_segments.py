@@ -9,7 +9,7 @@ def points_naive_better(starts, ends, points):
         for index, point in enumerate(points):
             if start > point:
                 continue
-            if point < end:
+            if end < point:
                 continue
             if start <= point <= end:
                 count[index] += 1
