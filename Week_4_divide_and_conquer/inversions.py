@@ -1,3 +1,11 @@
+# Inversion Count Problem
+
+# Goal: Design an algorithm that when given a sequence of numbers as an input, determine the number of 'inversions' that
+#       occur in the list. An 'inversion' is when a lower number comes after a higher number.
+#       Example: 9 1 6 2 --> 4 inversions     and      2 1 6 5 3 6 22 0 11 5 --> 16 inversions
+
+
+
 from itertools import combinations
 # from random import randint
 
@@ -206,7 +214,7 @@ if __name__ == '__main__':
     input_n = int(input())
     elements = list(map(int, input().split()))
     assert len(elements) == input_n
-    # print(inversions_naive(elements))
+    print(inversions_naive(elements))
     # print(inversions_better(elements))
     # print(inversions_better_elegant(elements))
     # print(inversions_second_best(elements))
