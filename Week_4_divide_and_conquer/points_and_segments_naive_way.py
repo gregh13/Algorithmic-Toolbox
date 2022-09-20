@@ -56,8 +56,8 @@ if __name__ == '__main__':
     input_starts, input_ends = data[2:2 * n + 2:2], data[3:2 * n + 2:2]
     input_points = data[2 * n + 2:]
     #
-    # output_count1 = points_cover_naive(input_starts, input_ends, input_points)
-    # print(*output_count1)
+    output_count1 = points_cover_naive(input_starts, input_ends, input_points)
+    print(*output_count1)
     # output_count = points_naive_better(input_starts, input_ends, input_points)
-    output_count = points_dict(input_starts, input_ends, input_points)
-    print(*output_count)
+    # output_count = points_dict(input_starts, input_ends, input_points)
+    # print(*output_count)

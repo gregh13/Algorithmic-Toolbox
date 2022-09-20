@@ -12,8 +12,8 @@ n_range = int(sys.argv[3])
 
 for i in range(tests):
     print("Test # " + str(i))
-    # run the generator gen.py with parameter n, n_range, and the seed i
-    os.system("python3 gen.py " + str(n) + " " + str(n_range) + " " + str(i) + " > input.txt")
+    # run the generator points_gen.py with parameter n, n_range, and the seed i
+    os.system("python3 points_gen.py " + str(n) + " " + str(n_range) + " " + str(i) + " > input.txt")
     # run the model solution model.py
     # Notice that it is not necessary that solution is implemented in
     # python , you can as well run ./model <input.txt >model.txt for a C++
