@@ -5,14 +5,14 @@ def points_naive_better(starts, ends, points):
     assert len(starts) == len(ends)
     count = [0] * len(points)
 
-    for i in range(starts):
-        for j in range(points):
-            if starts[i] > points[j]:
+    for start, end in zip(starts, ends):
+        for index, point in enumerate(points):
+            if start > point:
                 continue
-            if points[j] < ends[i]:
+            if point < end:
                 continue
-            if starts[i] <= points[j] <= ends[i]:
-                count[j] += 1
+            if start <= point <= end:
+                count[index] += 1
     return count
 
 
