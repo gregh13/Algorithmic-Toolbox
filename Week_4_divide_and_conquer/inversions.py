@@ -8,6 +8,28 @@
 from itertools import combinations
 
 
+def inversion_count_mergesort(original_sequence):
+    def merge(left_seq, right_seq):
+        pass
+
+    def merge_sort(sequence):
+
+        n = len(sequence)
+        if n == 1:
+            return sequence
+
+        mid = n // 2
+        left_sequence = merge_sort(sequence[:mid])
+        right_sequence = merge_sort(sequence[mid:])
+        new_seq = merge(left_sequence, right_sequence)
+
+        return new_seq
+
+    inversions = [0]
+    merge_sort(original_sequence)
+    return inversions[0]
+
+
 def inversions_recursive_divide(sequence):
     def divide_and_conquer(sequence):
         len_seq = len(sequence)
@@ -219,4 +241,4 @@ if __name__ == '__main__':
     # print(inversions_second_best(elements))
 
     print(inversions_recursive_divide(elements))
-    print(inversions_recursive_divide_random(elements))
+
