@@ -5,12 +5,12 @@ def points_dict_better(starts, ends, points):
     len_start = len(starts)
     assert len_start == len(ends)
     count = [0] * len(points)
-
-    dictionary = {p: 0 for p in points}
+    points_set = set(points)
+    dictionary = {p: 0 for p in points_set}
 
     for i in range(len_start):
         for val in range(starts[i], ends[i] + 1):
-            if val in dictionary:
+            if val in points_set:
                 dictionary[val] += 1
 
     for index, point in enumerate(points):
