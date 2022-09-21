@@ -20,8 +20,9 @@ def inversion_count_mergesort(original_sequence):
                 left_length -= 1
             else:
                 merged_seq.append(right_seq.pop(0))
-                inversions[0] += 1 * left_length
 
+                # Multiply by list length as that's how many 'places' it must be moved (i.e. inversions)
+                inversions[0] += 1 * left_length
 
         # One list will be exhausted above, must add remaining items left in other list
         if left_seq:
@@ -43,7 +44,6 @@ def inversion_count_mergesort(original_sequence):
         left_sequence = merge_sort(sequence[:mid])
         right_sequence = merge_sort(sequence[mid:])
         new_seq = merge(left_sequence, right_sequence)
-
         return new_seq
 
     inversions = [0]
@@ -52,6 +52,11 @@ def inversion_count_mergesort(original_sequence):
 
 
 def inversions_recursive_divide(sequence):
+    # A variation of the quicksort 3, performs well, but not as well as the above merge sort
+    # Main issue is that since the original order of the sequence determines the inversion numbers,
+    # the shuffling around of sorted numbers doesn't work, and with my variation of creating two new lists
+    # the random starting pivot element is taken away, meaning that the first element is always the pivot
+    # This is especially slow for nearly sorted inputs as the division sizes will be unbalanced
     def divide_and_conquer(sequence):
         len_seq = len(sequence)
         if len_seq < 2:
@@ -240,6 +245,7 @@ def inversions_recursive_divide(sequence):
 #             del sequence[index]
 #
 
+# Started naive solution, used to check the accuracy of the above models
 def inversions_naive(a):
     number_of_inversions = 0
     for i, j in combinations(range(len(a)), 2):
@@ -256,7 +262,7 @@ if __name__ == '__main__':
     input_n = int(input())
     elements = list(map(int, input().split()))
     assert len(elements) == input_n
-    print(inversions_naive(elements))
+    # print(inversions_naive(elements))
     # print(inversions_better(elements))
     # print(inversions_better_elegant(elements))
     # print(inversions_second_best(elements))
