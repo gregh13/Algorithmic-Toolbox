@@ -11,14 +11,17 @@ from itertools import combinations
 def inversion_count_mergesort(original_sequence):
     def merge(left_seq, right_seq):
         merged_seq = []
+        left_length = len(left_seq)
         while left_seq and right_seq:
             left = left_seq[0]
             right = right_seq[0]
             if left < right:
                 merged_seq.append(left_seq.pop(0))
+                left_length -= 1
             else:
                 merged_seq.append(right_seq.pop(0))
-                inversions[0] += 1
+                inversions[0] += 1 * left_length
+
 
         # One list will be exhausted above, must add remaining items left in other list
         if left_seq:
@@ -258,5 +261,6 @@ if __name__ == '__main__':
     # print(inversions_better_elegant(elements))
     # print(inversions_second_best(elements))
 
-    print(inversions_recursive_divide(elements))
+    # print(inversions_recursive_divide(elements))
+    print(inversion_count_mergesort(elements))
 
