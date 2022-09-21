@@ -10,7 +10,24 @@ from itertools import combinations
 
 def inversion_count_mergesort(original_sequence):
     def merge(left_seq, right_seq):
-        pass
+        merged_seq = []
+        while left_seq and right_seq:
+            left = left_seq[0]
+            right = right_seq[0]
+            if left < right:
+                merged_seq.append(left_seq.pop(0))
+            else:
+                merged_seq.append(right_seq.pop(0))
+
+        # One list will be exhausted above, must add remaining items left in other list
+        if left_seq:
+            for val in left_seq:
+                merged_seq.append(val)
+        else:
+            for val in right_seq:
+                merged_seq.append(val)
+
+        return merged_seq
 
     def merge_sort(sequence):
 
