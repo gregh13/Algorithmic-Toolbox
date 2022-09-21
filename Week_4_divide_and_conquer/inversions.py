@@ -5,21 +5,20 @@
 #       Example: 9 1 6 2 --> 4 inversions     and      2 1 6 5 3 6 22 0 11 5 --> 16 inversions
 
 
-
 from itertools import combinations
-# from random import randint
 
 
 def inversions_recursive_divide(sequence):
     def divide_and_conquer(sequence):
-        if not sequence:
+        len_seq = len(sequence)
+        if len_seq < 2:
             return
         lower_list = []
         higher_list = []
         pivot = sequence[0]
         midpoint_1 = 0
         midpoint_2 = 1
-        for i in range(1, len(sequence)):
+        for i in range(1, len_seq):
             val = sequence[i]
             if val < pivot:
                 lower_list.append(val)
@@ -220,3 +219,4 @@ if __name__ == '__main__':
     # print(inversions_second_best(elements))
 
     print(inversions_recursive_divide(elements))
+    print(inversions_recursive_divide_random(elements))
