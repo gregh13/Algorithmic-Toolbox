@@ -1,7 +1,7 @@
 from sys import stdin
 
 
-def points_dict_better(starts, ends, points):
+def points_dict_reversed(starts, ends, points):
     len_start = len(starts)
     assert len_start == len(ends)
     count = [0] * len(points)
@@ -9,9 +9,9 @@ def points_dict_better(starts, ends, points):
     dictionary = {p: 0 for p in points_set}
 
     for i in range(len_start):
-        for val in range(starts[i], ends[i] + 1):
-            if val in points_set:
-                dictionary[val] += 1
+        for point in points_set:
+            if starts[i] <= point <= ends[i]:
+                dictionary[point] += 1
 
     for index, point in enumerate(points):
         count[index] = dictionary[point]
@@ -72,5 +72,5 @@ if __name__ == '__main__':
     input_starts, input_ends = data[2:2 * n + 2:2], data[3:2 * n + 2:2]
     input_points = data[2 * n + 2:]
 
-    output_count = points_dict_better(input_starts, input_ends, input_points)
+    output_count = points_dict(input_starts, input_ends, input_points)
     print(*output_count)
