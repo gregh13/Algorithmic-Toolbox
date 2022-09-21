@@ -15,7 +15,7 @@ def inversion_count_mergesort(original_sequence):
         while left_seq and right_seq:
             left = left_seq[0]
             right = right_seq[0]
-            if left < right:
+            if left <= right:
                 merged_seq.append(left_seq.pop(0))
                 left_length -= 1
             else:
