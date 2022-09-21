@@ -18,6 +18,7 @@ def inversion_count_mergesort(original_sequence):
                 merged_seq.append(left_seq.pop(0))
             else:
                 merged_seq.append(right_seq.pop(0))
+                inversions[0] += 1
 
         # One list will be exhausted above, must add remaining items left in other list
         if left_seq:
