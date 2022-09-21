@@ -12,4 +12,4 @@ random.seed(myseed)
 # print(f"Range of inputs: 0 to {n_range}")
 # print(f"Seed number: {myseed}")
 
-print(' '.join([str(random.randint(0, n_range)) for i in range(n)]))
+print(' '.join([str(random.randint(-50, n_range)) for i in range(n)]))

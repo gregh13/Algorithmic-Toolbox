@@ -15,7 +15,7 @@ random.seed(myseed)
 
 segment_list = []
 for i in range(n):
-    start = random.randint(0, n_range)
+    start = random.randint(-100, n_range)
     segment_list.append(str(start))
     end = start + random.randint(0, n_range)
     segment_list.append(str(end))
