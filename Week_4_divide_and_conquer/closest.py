@@ -30,7 +30,6 @@ def min_squared_divide_and_conquer(points):
         min_dist_right = recur_divide(point_list[mid:], min_dist)
         min_dist = min(min_dist_left, min_dist_right)
 
-
         # Now compare the two sets
         mid_x_val = point_list[mid].x
 
@@ -38,9 +37,10 @@ def min_squared_divide_and_conquer(points):
         possible_points = [point for point in point_list if abs(point.x - mid_x_val) <= min_dist]
 
         # Now sort new list by y value
-        possible_points.sort(key=lambda point: point[1])
+        # possible_points.sort(key=lambda point: point[1])
 
         # Check point by point for any smaller squared distances
+        # Start value used to reduce nested loop list length
         start = 1
         for point1 in possible_points:
             for point2 in possible_points[start:]:
@@ -57,8 +57,8 @@ def min_squared_divide_and_conquer(points):
         check = True
         return min_dist
 
-    # Sort points by x value
-    points.sort()
+    # Sort points by x value, add index value for y sort matching within recursive calls
+    sorted_x_points = [i for i in enumerate(sorted(points))]
 
     # Initialize min_distance to positive infinity
     min_distance = float("inf")
