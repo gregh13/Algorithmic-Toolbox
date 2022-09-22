@@ -43,6 +43,21 @@ def insert(root, x):
     return root
 
 
+# Create a balanced tree:
+# sort segments by start value
+def interval_tree(starts, ends, points):
+    sorted_segments = sorted(zip(starts, ends))
+    print(sorted_segments)
+
+    def build_tree(sequence):
+        seq_length = len(sequence)
+        if seq_length < 2:
+            return
+
+        mid = len(sequence) // 2
+        build_tree(sequence[:mid])
+        build_tree(sequence[mid:])
+
 
 
 
