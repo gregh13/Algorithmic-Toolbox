@@ -43,13 +43,13 @@ def insert(root, x):
     return root
 
 
-def inOrder(root):
-    if root == None:
-        return
-
-    inOrder(root.left)
-    print(root, end="")
-    inOrder(root.right)
+# def inOrder(root):
+#     if root == None:
+#         return
+#
+#     inOrder(root.left)
+#     print(root, end="")
+#     inOrder(root.right)
 
 
 # Create a balanced tree:
@@ -95,12 +95,18 @@ def interval_tree(starts, ends, points):
                 return
 
     assert len(starts) == len(ends)
+
+    # Initialize count array
     count = [0] * len(points)
+
+    # Sort segments for more balanced interval tree
     sorted_segments = sorted(zip(starts, ends))
     print(sorted_segments)
 
+    # Build interval tree
     root = build_tree(None, sorted_segments)
 
+    # Search tree for each point and calculate count for each point
     for index, point in enumerate(points):
         point_counter = [0]
         calc_point_counter(root, point)
