@@ -43,13 +43,13 @@ def insert(root, x):
     return root
 
 
-def inOrder(root):
-    if root == None:
-        return
-
-    inOrder(root.left)
-    print(root, end="")
-    inOrder(root.right)
+# def inOrder(root):
+#     if root == None:
+#         return
+#
+#     inOrder(root.left)
+#     print(root, end="")
+#     inOrder(root.right)
 
 
 # Create a balanced tree:
@@ -74,31 +74,31 @@ def interval_tree(starts, ends, points):
         root = insert(root, Interval(sequence[mid][0], sequence[mid][1]))
         build_tree(root, sequence[:mid])
         build_tree(root, sequence[mid+1:])
-        inOrder(root)
+        # inOrder(root)
         return root
 
     def calc_point_counter(root, point):
         # Add to point_counter if within segment start and end
-        print("Point: ", point)
-        print("Counter Before: ", point_counter[0])
-        print("Root Range: ", root.range.low, root.range.high)
-        print("Root Left: ", root.left)
-        print("Root Right: ", root.right)
+        # print("Point: ", point)
+        # print("Counter Before: ", point_counter[0])
+        # print("Root Range: ", root.range.low, root.range.high)
+        # print("Root Left: ", root.left)
+        # print("Root Right: ", root.right)
         if root.range.low <= point <= root.range.high:
             point_counter[0] += 1
-        print("Counter After: ", point_counter[0])
+        # print("Counter After: ", point_counter[0])
 
         # Check child nodes recursively for other segments
         if root.left is not None and root.left.max >= point:
-            print("Go left")
+            # print("Go left")
             calc_point_counter(root.left, point)
 
         # Left branch is exhausted, check right branch
         if root.right is not None:
-            print("Go Right")
+            # print("Go Right")
             calc_point_counter(root.right, point)
 
-        print("Done")
+        # print("Done")
         # All branches and leaves checked
         return
 
@@ -106,6 +106,10 @@ def interval_tree(starts, ends, points):
 
     # Initialize count array
     count = [0] * len(points)
+
+    # If no segments
+    if len(starts) == 0:
+        return count
 
     # Sort segments for more balanced interval tree
     sorted_segments = sorted(zip(starts, ends))
@@ -123,54 +127,42 @@ def interval_tree(starts, ends, points):
     return count
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def points_dict(starts, ends, points):
-    len_start = len(starts)
-    assert len_start == len(ends)
-    count = [0] * len(points)
-    dictionary = {}
-
-    for start, end in zip(starts, ends):
-        for val in range(start, end + 1):
-            if val not in dictionary:
-                dictionary[val] = 1
-            else:
-                dictionary[val] += 1
-
-    for index, point in enumerate(points):
-        if point in dictionary:
-            count[index] = dictionary[point]
-
-    return count
-
-
-def points_cover_naive(starts, ends, points):
-    assert len(starts) == len(ends)
-    count = [0] * len(points)
-
-    for index, point in enumerate(points):
-        for start, end in zip(starts, ends):
-            if start <= point <= end:
-                count[index] += 1
-
-    return count
+#
+# def points_dict(starts, ends, points):
+#     len_start = len(starts)
+#     assert len_start == len(ends)
+#     count = [0] * len(points)
+#     dictionary = {}
+#
+#     for start, end in zip(starts, ends):
+#         for val in range(start, end + 1):
+#             if val not in dictionary:
+#                 dictionary[val] = 1
+#             else:
+#                 dictionary[val] += 1
+#
+#     for index, point in enumerate(points):
+#         if point in dictionary:
+#             count[index] = dictionary[point]
+#
+#     return count
+#
+#
+# def points_cover_naive(starts, ends, points):
+#     assert len(starts) == len(ends)
+#     count = [0] * len(points)
+#
+#     for index, point in enumerate(points):
+#         for start, end in zip(starts, ends):
+#             if start <= point <= end:
+#                 count[index] += 1
+#
+#     return count
 
 
 if __name__ == '__main__':
-    data = list(map(int, input().split()))
+    # data = list(map(int, input().split()))
+    data = list(map(int, stdin.read().split()))
     n, m = data[0], data[1]
     input_starts, input_ends = data[2:2 * n + 2:2], data[3:2 * n + 2:2]
     input_points = data[2 * n + 2:]
