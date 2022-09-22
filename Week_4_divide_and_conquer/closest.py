@@ -10,6 +10,43 @@ def distance_squared(first_point, second_point):
     return (first_point.x - second_point.x) ** 2 + (first_point.y - second_point.y) ** 2
 
 
+
+
+def min_squared_divide_and_conquer(points):
+    print(points)
+    # Sort points by x value
+    sorted_points = sorted(points)
+    print(sorted_points)
+
+    min_distance = float("inf")
+
+    def recur_divide(point_list, min_dist):
+        list_length = len(point_list)
+
+        if list_length <= 2:
+            if list_length == 2:
+                min_dist = min(min_dist, distance_squared(point_list[0], point_list[1]))
+            return min_dist
+
+        mid = list_length // 2
+        min_dist_left = recur_divide(point_list[:mid], min_dist)
+        min_dist_right = recur_divide(point_list[mid:], min_dist)
+        min_dist = min(min_dist_left, min_dist_right)
+
+        # Now compare the two sets
+
+
+
+
+
+
+
+
+
+
+
+
+
 def minimum_distance_squared_naive(points):
     min_distance_squared = float("inf")
 
