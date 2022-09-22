@@ -55,11 +55,6 @@ def inOrder(root):
 # Create a balanced tree:
 # sort segments by start value
 def interval_tree(starts, ends, points):
-    assert len(starts) == len(ends)
-    count = [0] * len(points)
-    sorted_segments = sorted(zip(starts, ends))
-    print(sorted_segments)
-
     def build_tree(root, sequence):
         print("Root: ", root)
         print("Sequence: ", sequence)
@@ -82,28 +77,36 @@ def interval_tree(starts, ends, points):
         # inOrder(root)
         return root
 
-    def calc_point_count(root, points):
-        print("Main Root: ", root)
+    def calc_point_counter(root, point):
+        # Add to point_counter if within segment start and end
+        if root.range.low <= point <= root.range.high:
+            point_counter[0] += 1
 
-        for point in points:
-            point_count = 0
-            while True:
-                if point > root.max:
-                    # No more segments contain that point
-                    break
-                elif point < root.range.low:
-                    # Go left
-                    root = root.left
-                elif root.range.low <= point <= root.range.high:
-                    point_count += 1
-                    root = root.left
+        # Check child nodes recursively for other segments
+        if root.left is not None and root.left.max > point:
+            return calc_point_counter(root.left, point)
 
+        else:
+            # Left branch is exhausted, check right branch
+            if root.right is not None:
+                return calc_point_counter(root.right, point)
+            else:
+                # At leaf node
+                return
 
+    assert len(starts) == len(ends)
+    count = [0] * len(points)
+    sorted_segments = sorted(zip(starts, ends))
+    print(sorted_segments)
 
     root = build_tree(None, sorted_segments)
-    calc_point_count(root, points)
-    return count
 
+    for index, point in enumerate(points):
+        point_counter = [0]
+        calc_point_counter(root, point)
+        count[index] = point_counter[0]
+
+    return count
 
 
 
