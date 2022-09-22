@@ -10,16 +10,7 @@ def distance_squared(first_point, second_point):
     return (first_point.x - second_point.x) ** 2 + (first_point.y - second_point.y) ** 2
 
 
-
-
 def min_squared_divide_and_conquer(points):
-    print(points)
-    # Sort points by x value
-    sorted_points = sorted(points)
-    print(sorted_points)
-
-    min_distance = float("inf")
-
     def recur_divide(point_list, min_dist):
         list_length = len(point_list)
 
@@ -52,19 +43,22 @@ def min_squared_divide_and_conquer(points):
                 else:
                     # Calculate distance
                     min_dist = min(min_dist, distance_squared(point1, point2))
-            # Can remove from list since already check all available other points
+
+            # Can remove from list since already checked with all other available points
             del possible_points[0]
 
+        return min_dist
 
+    # Sort points by x value
+    points.sort()
 
+    # Initialize min_distance to positive infinity
+    min_distance = float("inf")
 
+    # Call recursive divide and conquer function
+    min_distance = recur_divide(points, min_distance)
 
-
-
-
-
-
-
+    return min_distance
 
 
 def minimum_distance_squared_naive(points):
@@ -85,4 +79,8 @@ if __name__ == '__main__':
         input_point = Point(x, y)
         input_points.append(input_point)
 
-    print("{0:.9f}".format(sqrt(minimum_distance_squared_naive(input_points))))
+    set1 = input_points
+    set2 = input_points
+    print("{0:.9f}".format(sqrt(minimum_distance_squared_naive(set1))))
+    print("{0:.9f}".format(sqrt(min_squared_divide_and_conquer(set2))))
+
