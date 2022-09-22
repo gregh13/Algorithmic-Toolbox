@@ -34,6 +34,11 @@ def min_squared_divide_and_conquer(points):
         min_dist = min(min_dist_left, min_dist_right)
 
         # Now compare the two sets
+        mid_x_val = point_list[mid].x
+
+        # Filter out points too far away for the next comparison
+        possible_points = [point for point in point_list if abs(point.x - mid_x_val) <= min_dist]
+
 
 
 
