@@ -6,8 +6,9 @@ class Interval:
         self.low = low
         self.high = high
 
-    def __str__(self):
-        return "[" + str(self.low) + "," + str(self.high) + "]"
+    # Used to print out specific node range, not needed for this challenge (but useful in the real world!)
+    # def __str__(self):
+    #     return "[" + str(self.low) + "," + str(self.high) + "]"
 
 
 class Node:
@@ -17,19 +18,25 @@ class Node:
         self.left = None
         self.right = None
 
-    def __str__(self):
-        return "[" + str(self.range.low) + ", " + str(self.range.high) + "] " + "max = " + str(self.max) + "\n"
+    # Used to print out tree order, not needed for this challenge (but useful in the real world!)
+    # def __str__(self):
+    #     return "[" + str(self.range.low) + ", " + str(self.range.high) + "] " + "max = " + str(self.max) + "\n"
 
 
+# Used to build the interval tree
 def insert(root, x):
+    # root is a Node object with range, max, left, and right attributes
+    # x is an Interval object with low and high attributes
     if root == None:
         return Node(x, x.high)
 
+    # Sort by lowest value in interval
     if x.low < root.range.low:
         root.left = insert(root.left, x)
     else:
         root.right = insert(root.right, x)
 
+    # Update max value for the parent node
     if root.max < x.high:
         root.max = x.high
 
