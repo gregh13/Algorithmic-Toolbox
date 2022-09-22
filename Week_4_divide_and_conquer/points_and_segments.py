@@ -43,30 +43,30 @@ def insert(root, x):
     return root
 
 
-# def inOrder(root):
-#     if root == None:
-#         return
-#
-#     inOrder(root.left)
-#     print(root, end="")
-#     inOrder(root.right)
+def inOrder(root):
+    if root == None:
+        return
+
+    inOrder(root.left)
+    print(root, end="")
+    inOrder(root.right)
 
 
 # Create a balanced tree:
 # sort segments by start value
 def interval_tree(starts, ends, points):
     def build_tree(root, sequence):
-        print("Root: ", root)
-        print("Sequence: ", sequence)
+        # print("Root: ", root)
+        # print("Sequence: ", sequence)
         seq_length = len(sequence)
         if seq_length < 2:
             if sequence:
                 # add Node
-                print("Seq == 1")
+                # print("Seq == 1")
                 root = insert(root, Interval(sequence[0][0], sequence[0][1]))
                 return root
             else:
-                print("Empty Seq")
+                # print("Empty Seq")
                 # Empty list
                 return None
 
@@ -74,25 +74,33 @@ def interval_tree(starts, ends, points):
         root = insert(root, Interval(sequence[mid][0], sequence[mid][1]))
         build_tree(root, sequence[:mid])
         build_tree(root, sequence[mid+1:])
-        # inOrder(root)
+        inOrder(root)
         return root
 
     def calc_point_counter(root, point):
         # Add to point_counter if within segment start and end
+        print("Point: ", point)
+        print("Counter Before: ", point_counter[0])
+        print("Root Range: ", root.range.low, root.range.high)
+        print("Root Left: ", root.left)
+        print("Root Right: ", root.right)
         if root.range.low <= point <= root.range.high:
             point_counter[0] += 1
+        print("Counter After: ", point_counter[0])
 
         # Check child nodes recursively for other segments
-        if root.left is not None and root.left.max > point:
-            return calc_point_counter(root.left, point)
+        if root.left is not None and root.left.max >= point:
+            print("Go left")
+            calc_point_counter(root.left, point)
 
-        else:
-            # Left branch is exhausted, check right branch
-            if root.right is not None:
-                return calc_point_counter(root.right, point)
-            else:
-                # At leaf node
-                return
+        # Left branch is exhausted, check right branch
+        if root.right is not None:
+            print("Go Right")
+            calc_point_counter(root.right, point)
+
+        print("Done")
+        # All branches and leaves checked
+        return
 
     assert len(starts) == len(ends)
 
@@ -101,7 +109,7 @@ def interval_tree(starts, ends, points):
 
     # Sort segments for more balanced interval tree
     sorted_segments = sorted(zip(starts, ends))
-    print(sorted_segments)
+    # print(sorted_segments)
 
     # Build interval tree
     root = build_tree(None, sorted_segments)
@@ -170,4 +178,6 @@ if __name__ == '__main__':
     # output_count = points_dict(input_starts, input_ends, input_points)
     # output_count = points_counter(input_starts, input_ends, input_points)
     # print(*output_count)
-    interval_tree(input_starts, input_ends, input_points)
+
+    output_count = interval_tree(input_starts, input_ends, input_points)
+    print(*output_count)
