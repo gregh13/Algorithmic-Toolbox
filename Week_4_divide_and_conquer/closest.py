@@ -47,12 +47,13 @@ def min_squared_divide_and_conquer(points):
             for point2 in possible_points[1:]:
                 # Any two points that have a difference in y greater than the min_dist need not be considered
                 if abs(point1.y - point2.y) > min_dist:
-                    # Since it is sorted by y, that means can reduce number of iterations
+                    # Since it is sorted by y, that means all numbers after are too far away
                     break
                 else:
+                    # Calculate distance
                     min_dist = min(min_dist, distance_squared(point1, point2))
-        # Can remove from list since already check all available other points
-        del possible_points[0]
+            # Can remove from list since already check all available other points
+            del possible_points[0]
 
 
 
