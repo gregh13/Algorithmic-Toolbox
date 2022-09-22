@@ -19,8 +19,8 @@ class Node:
         self.right = None
 
     # Used to print out tree order, not needed for this challenge (but useful in the real world!)
-    # def __str__(self):
-    #     return "[" + str(self.range.low) + ", " + str(self.range.high) + "] " + "max = " + str(self.max) + "\n"
+    def __str__(self):
+        return "[" + str(self.range.low) + ", " + str(self.range.high) + "] " + "max = " + str(self.max) + "\n"
 
 
 # Used to build the interval tree
@@ -43,6 +43,15 @@ def insert(root, x):
     return root
 
 
+def inOrder(root):
+    if root == None:
+        return
+
+    inOrder(root.left)
+    print(root, end="")
+    inOrder(root.right)
+
+
 # Create a balanced tree:
 # sort segments by start value
 def interval_tree(starts, ends, points):
@@ -54,17 +63,21 @@ def interval_tree(starts, ends, points):
         if seq_length < 2:
             if sequence:
                 # add Node
-                insert(root, Interval(sequence[0][0], sequence[0][1]))
+                root = insert(root, Interval(sequence[0][0], sequence[0][1]))
                 return
             else:
                 # Empty list
                 return
 
         mid = seq_length // 2
-        insert(root, Interval(sequence[mid]))
+        root = insert(root, Interval(sequence[mid][0], sequence[mid][1]))
         build_tree(root, sequence[:mid])
         build_tree(root, sequence[mid+1:])
+        return root
 
+    root = build_tree(None, sorted_segments)
+    inOrder(root)
+    return
 
 
 
@@ -120,6 +133,7 @@ if __name__ == '__main__':
     input_starts, input_ends = data[2:2 * n + 2:2], data[3:2 * n + 2:2]
     input_points = data[2 * n + 2:]
     # output_count = points_cover_naive(input_starts, input_ends, input_points)
-    output_count = points_dict(input_starts, input_ends, input_points)
+    # output_count = points_dict(input_starts, input_ends, input_points)
     # output_count = points_counter(input_starts, input_ends, input_points)
-    print(*output_count)
+    # print(*output_count)
+    interval_tree(input_starts, input_ends, input_points)
