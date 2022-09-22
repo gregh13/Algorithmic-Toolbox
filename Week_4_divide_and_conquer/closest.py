@@ -12,17 +12,24 @@ def distance_squared(first_point, second_point):
 
 def min_squared_divide_and_conquer(points):
     def recur_divide(point_list, min_dist):
+        # print("Point_list: ", point_list)
+        # print("Min_dist: ", min_dist)
+
         list_length = len(point_list)
 
         if list_length <= 2:
             if list_length == 2:
+                # print("JUST 2")
+                # print(distance_squared(point_list[0], point_list[1]))
                 min_dist = min(min_dist, distance_squared(point_list[0], point_list[1]))
+                # print(min_dist)
             return min_dist
 
         mid = list_length // 2
         min_dist_left = recur_divide(point_list[:mid], min_dist)
         min_dist_right = recur_divide(point_list[mid:], min_dist)
         min_dist = min(min_dist_left, min_dist_right)
+
 
         # Now compare the two sets
         mid_x_val = point_list[mid].x
@@ -34,8 +41,8 @@ def min_squared_divide_and_conquer(points):
         possible_points.sort(key=lambda point: point[1])
 
         # Check point by point for any smaller squared distances
+        start = 1
         for point1 in possible_points:
-            start = 1
             for point2 in possible_points[start:]:
                 # Any two points that have a difference in y greater than the min_dist need not be considered
                 if abs(point1.y - point2.y) > min_dist:
@@ -47,7 +54,7 @@ def min_squared_divide_and_conquer(points):
 
             # Move start forward for inner loop splice
             start += 1
-
+        check = True
         return min_dist
 
     # Sort points by x value
@@ -80,8 +87,8 @@ if __name__ == '__main__':
         input_point = Point(x, y)
         input_points.append(input_point)
 
-    set1 = input_points
-    set2 = input_points
-    print("{0:.9f}".format(sqrt(minimum_distance_squared_naive(set1))))
-    print("{0:.9f}".format(sqrt(min_squared_divide_and_conquer(set2))))
+    # set1 = input_points
+    # set2 = input_points
+    # print("{0:.9f}".format(sqrt(minimum_distance_squared_naive(set1))))
+    print("{0:.9f}".format(sqrt(min_squared_divide_and_conquer(input_points))))
 
