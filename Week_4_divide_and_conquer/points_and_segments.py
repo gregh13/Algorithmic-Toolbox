@@ -59,24 +59,28 @@ def interval_tree(starts, ends, points):
     print(sorted_segments)
 
     def build_tree(root, sequence):
+        print("Root: ", root)
+        print("Sequence: ", sequence)
         seq_length = len(sequence)
         if seq_length < 2:
             if sequence:
                 # add Node
+                print("Seq == 1")
                 root = insert(root, Interval(sequence[0][0], sequence[0][1]))
-                return
+                return root
             else:
+                print("Empty Seq")
                 # Empty list
-                return
+                return None
 
         mid = seq_length // 2
         root = insert(root, Interval(sequence[mid][0], sequence[mid][1]))
         build_tree(root, sequence[:mid])
         build_tree(root, sequence[mid+1:])
+        # inOrder(root)
         return root
 
-    root = build_tree(None, sorted_segments)
-    inOrder(root)
+    build_tree(None, sorted_segments)
     return
 
 
@@ -128,7 +132,7 @@ def points_cover_naive(starts, ends, points):
 
 
 if __name__ == '__main__':
-    data = list(map(int, stdin.read().split()))
+    data = list(map(int, input().split()))
     n, m = data[0], data[1]
     input_starts, input_ends = data[2:2 * n + 2:2], data[3:2 * n + 2:2]
     input_points = data[2 * n + 2:]
