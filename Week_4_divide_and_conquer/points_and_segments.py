@@ -1,6 +1,51 @@
 from sys import stdin
 
 
+class Interval:
+    def __init__(self, low, high):
+        self.low = low
+        self.high = high
+
+    def __str__(self):
+        return "[" + str(self.low) + "," + str(self.high) + "]"
+
+
+class Node:
+    def __init__(self, range, max):
+        self.range = range
+        self.max = max
+        self.left = None
+        self.right = None
+
+    def __str__(self):
+        return "[" + str(self.range.low) + ", " + str(self.range.high) + "] " + "max = " + str(self.max) + "\n"
+
+
+def insert(root, x):
+    if root == None:
+        return Node(x, x.high)
+
+    if x.low < root.range.low:
+        root.left = insert(root.left, x)
+    else:
+        root.right = insert(root.right, x)
+
+    if root.max < x.high:
+        root.max = x.high
+
+    return root
+
+
+
+
+
+
+
+
+
+
+
+
 def points_dict(starts, ends, points):
     len_start = len(starts)
     assert len_start == len(ends)
