@@ -55,6 +55,8 @@ def inOrder(root):
 # Create a balanced tree:
 # sort segments by start value
 def interval_tree(starts, ends, points):
+    assert len(starts) == len(ends)
+    count = [0] * len(points)
     sorted_segments = sorted(zip(starts, ends))
     print(sorted_segments)
 
@@ -80,8 +82,27 @@ def interval_tree(starts, ends, points):
         # inOrder(root)
         return root
 
-    build_tree(None, sorted_segments)
-    return
+    def calc_point_count(root, points):
+        print("Main Root: ", root)
+
+        for point in points:
+            point_count = 0
+            while True:
+                if point > root.max:
+                    # No more segments contain that point
+                    break
+                elif point < root.range.low:
+                    # Go left
+                    root = root.left
+                elif root.range.low <= point <= root.range.high:
+                    point_count += 1
+                    root = root.left
+
+
+
+    root = build_tree(None, sorted_segments)
+    calc_point_count(root, points)
+    return count
 
 
 
