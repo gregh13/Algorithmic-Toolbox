@@ -25,8 +25,8 @@ class Node:
 
 # Used to build the interval tree
 def insert(root, x):
-    # root is a Node object with range, max, left, and right attributes
-    # x is an Interval object with low and high attributes
+    # root is a Node object with range (Interval), max (int), left (Node), and right (Node) attributes
+    # x is an Interval object with low (int) and high (int) attributes
     if root == None:
         return Node(x, x.high)
 
@@ -41,6 +41,13 @@ def insert(root, x):
         root.max = x.high
 
     return root
+
+
+
+
+
+
+
 
 
 
