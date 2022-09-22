@@ -46,11 +46,11 @@ for i in range(tests):
     # Read the output of the model solution:
     with open('model.txt') as f:
         model = f.read()
-    print("Model: ", model)
+    # print("Model: ", model)
     # Read the output of the naive solution:
     with open('naive.txt') as f:
         naive = f.read()
-    print("Naive: ", naive)
+    # print("Naive: ", naive)
     if model != naive:
         print("\nBROKEN\n")
         break
