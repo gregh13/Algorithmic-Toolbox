@@ -49,14 +49,21 @@ def interval_tree(starts, ends, points):
     sorted_segments = sorted(zip(starts, ends))
     print(sorted_segments)
 
-    def build_tree(sequence):
+    def build_tree(root, sequence):
         seq_length = len(sequence)
         if seq_length < 2:
-            return
+            if sequence:
+                # add Node
+                insert(root, Interval(sequence[0][0], sequence[0][1]))
+                return
+            else:
+                # Empty list
+                return
 
-        mid = len(sequence) // 2
-        build_tree(sequence[:mid])
-        build_tree(sequence[mid:])
+        mid = seq_length // 2
+        insert(root, Interval(sequence[mid]))
+        build_tree(root, sequence[:mid])
+        build_tree(root, sequence[mid+1:])
 
 
 
