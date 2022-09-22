@@ -35,7 +35,8 @@ def min_squared_divide_and_conquer(points):
 
         # Check point by point for any smaller squared distances
         for point1 in possible_points:
-            for point2 in possible_points[1:]:
+            start = 1
+            for point2 in possible_points[start:]:
                 # Any two points that have a difference in y greater than the min_dist need not be considered
                 if abs(point1.y - point2.y) > min_dist:
                     # Since it is sorted by y, that means all numbers after are too far away
@@ -44,8 +45,8 @@ def min_squared_divide_and_conquer(points):
                     # Calculate distance
                     min_dist = min(min_dist, distance_squared(point1, point2))
 
-            # Can remove from list since already checked with all other available points
-            del possible_points[0]
+            # Move start forward for inner loop splice
+            start += 1
 
         return min_dist
 
