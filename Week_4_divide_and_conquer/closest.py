@@ -36,18 +36,8 @@ def min_squared_divide_and_conquer(points):
         mid_x_val = point_list[mid].x
 
         # Merge both sorted_y lists
-        sorted_y_all = []
-        while sorted_y_right and sorted_y_left:
-            a = sorted_y_left[0][1]
-            b = sorted_y_right[0][1]
-            if a < b:
-                sorted_y_all.append(sorted_y_left.pop(0))
-            else:
-                sorted_y_all.append(sorted_y_right.pop(0))
-
-        # Add the rest of either list (since one will be exhausted above)
-        sorted_y_all.extend([i for i in sorted_y_left])
-        sorted_y_all.extend([i for i in sorted_y_right])
+        sorted_y_all = sorted_y_left + sorted_y_left
+        sorted_y_all.sort(key=lambda p: p[1])
 
         # Filter out points too far away for the next comparison
         possible_points = [point for point in sorted_y_all if abs(point.x - mid_x_val) <= min_dist]
