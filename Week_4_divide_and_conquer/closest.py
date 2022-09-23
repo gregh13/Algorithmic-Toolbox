@@ -19,10 +19,6 @@ def min_squared_divide_and_conquer(points):
             if list_length == 2:
                 # Check for smaller distances
                 min_dist = min(min_dist, distance_squared(point_list[0], point_list[1]))
-
-                # Sort two points by y value
-                # point_list.sort(key=lambda p: p[1])
-
             return min_dist
 
         mid = list_length // 2
@@ -35,10 +31,6 @@ def min_squared_divide_and_conquer(points):
         # Get x-value that was used as the dividing line
         mid_x_val = point_list[mid].x
 
-        # Merge both sorted_y lists
-        # sorted_y_all = sorted_y_left + sorted_y_right
-        # sorted_y_all.sort(key=lambda p: p[1])
-
         # Filter out points too far away for the next comparison
         possible_points = [point for point in point_list if abs(point.x - mid_x_val) <= min_dist]
 
@@ -50,6 +42,7 @@ def min_squared_divide_and_conquer(points):
         start = 1
         for point1 in possible_points:
             # Oddly, turns out only 7 items can be within range, otherwise difference in y val is > min_dist
+            # This Key Lemma dramatically helps reduce time taken for this nest loop
             for point2 in possible_points[start:start+7]:
 
                 min_dist = min(min_dist, distance_squared(point1, point2))
