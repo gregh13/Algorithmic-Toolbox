@@ -36,7 +36,7 @@ def min_squared_divide_and_conquer(points):
         mid_x_val = point_list[mid].x
 
         # Merge both sorted_y lists
-        sorted_y_all = sorted_y_left + sorted_y_left
+        sorted_y_all = sorted_y_left + sorted_y_right
         sorted_y_all.sort(key=lambda p: p[1])
 
         # Filter out points too far away for the next comparison
@@ -49,7 +49,8 @@ def min_squared_divide_and_conquer(points):
         # Start value used to reduce nested loop list length
         start = 1
         for point1 in possible_points:
-            for point2 in possible_points[start:]:
+            # Oddly, turns out only 7 items can be within range
+            for point2 in possible_points[start:start+7]:
                 # Any two points that have a difference in y greater than the min_dist need not be considered
                 if abs(point1.y - point2.y) > min_dist:
                     # Since it is sorted by y, that means all numbers after are too far away
