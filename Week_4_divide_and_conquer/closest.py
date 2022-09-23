@@ -21,9 +21,9 @@ def min_squared_divide_and_conquer(points):
                 min_dist = min(min_dist, distance_squared(point_list[0], point_list[1]))
 
                 # Sort two points by y value
-                sorted_y = sorted(points, key=lambda p: p[1])
+                point_list.sort(key=lambda p: p[1])
 
-            return min_dist, sorted_y
+            return min_dist, point_list
 
         mid = list_length // 2
         min_dist_left, sorted_y_left = recur_divide(point_list[:mid], min_dist)
@@ -38,8 +38,8 @@ def min_squared_divide_and_conquer(points):
         # Merge both sorted_y lists
         sorted_y_all = []
         while sorted_y_right and sorted_y_left:
-            a = sorted_y_left[0]
-            b = sorted_y_right[0]
+            a = sorted_y_left[0][1]
+            b = sorted_y_right[0][1]
             if a < b:
                 sorted_y_all.append(sorted_y_left.pop(0))
             else:
