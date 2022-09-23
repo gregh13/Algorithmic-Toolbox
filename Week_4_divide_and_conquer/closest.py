@@ -21,13 +21,13 @@ def min_squared_divide_and_conquer(points):
                 min_dist = min(min_dist, distance_squared(point_list[0], point_list[1]))
 
                 # Sort two points by y value
-                point_list.sort(key=lambda p: p[1])
+                # point_list.sort(key=lambda p: p[1])
 
-            return min_dist, point_list
+            return min_dist
 
         mid = list_length // 2
-        min_dist_left, sorted_y_left = recur_divide(point_list[:mid], min_dist)
-        min_dist_right, sorted_y_right = recur_divide(point_list[mid:], min_dist)
+        min_dist_left = recur_divide(point_list[:mid], min_dist)
+        min_dist_right = recur_divide(point_list[mid:], min_dist)
 
         # Get the smallest distance
         min_dist = min(min_dist_left, min_dist_right)
@@ -36,32 +36,27 @@ def min_squared_divide_and_conquer(points):
         mid_x_val = point_list[mid].x
 
         # Merge both sorted_y lists
-        sorted_y_all = sorted_y_left + sorted_y_right
-        sorted_y_all.sort(key=lambda p: p[1])
+        # sorted_y_all = sorted_y_left + sorted_y_right
+        # sorted_y_all.sort(key=lambda p: p[1])
 
         # Filter out points too far away for the next comparison
-        possible_points = [point for point in sorted_y_all if abs(point.x - mid_x_val) <= min_dist]
+        possible_points = [point for point in point_list if abs(point.x - mid_x_val) <= min_dist]
 
         # Now sort new list by y value
-        # possible_points.sort(key=lambda point: point[1])
+        possible_points.sort(key=lambda point: point[1])
 
         # Check point by point for any smaller squared distances
         # Start value used to reduce nested loop list length
         start = 1
         for point1 in possible_points:
-            # Oddly, turns out only 7 items can be within range
+            # Oddly, turns out only 7 items can be within range, otherwise difference in y val is > min_dist
             for point2 in possible_points[start:start+7]:
-                # Any two points that have a difference in y greater than the min_dist need not be considered
-                if abs(point1.y - point2.y) > min_dist:
-                    # Since it is sorted by y, that means all numbers after are too far away
-                    break
-                else:
-                    # Calculate distance
-                    min_dist = min(min_dist, distance_squared(point1, point2))
+
+                min_dist = min(min_dist, distance_squared(point1, point2))
 
             # Move start forward for inner loop splice
             start += 1
-        return min_dist, sorted_y_all
+        return min_dist
 
     # Sort points by x value, add index value for y sort matching within recursive calls
     points.sort()
@@ -70,7 +65,7 @@ def min_squared_divide_and_conquer(points):
     min_distance = float("inf")
 
     # Call recursive divide and conquer function
-    min_distance, _ = recur_divide(points, min_distance)
+    min_distance = recur_divide(points, min_distance)
 
     return min_distance
 
