@@ -70,7 +70,7 @@ def min_squared_divide_and_conquer(points):
 
             # Move start forward for inner loop splice
             start += 1
-        return min_dist
+        return min_dist, sorted_y_all
 
     # Sort points by x value, add index value for y sort matching within recursive calls
     points.sort()
@@ -79,7 +79,7 @@ def min_squared_divide_and_conquer(points):
     min_distance = float("inf")
 
     # Call recursive divide and conquer function
-    min_distance = recur_divide(points, min_distance)
+    min_distance, _ = recur_divide(points, min_distance)
 
     return min_distance
 
