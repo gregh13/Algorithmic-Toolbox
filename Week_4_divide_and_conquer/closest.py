@@ -81,8 +81,5 @@ if __name__ == '__main__':
         input_point = Point(x, y)
         input_points.append(input_point)
 
-    # set1 = input_points
-    # set2 = input_points
-    # print("{0:.9f}".format(sqrt(minimum_distance_squared_naive(set1))))
     print("{0:.9f}".format(sqrt(min_squared_divide_and_conquer(input_points))))
 
