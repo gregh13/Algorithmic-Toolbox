@@ -17,9 +17,6 @@ def compute_operations(n):
     # Second value in tuple is a function will be used to check the previous number's value
     funct_list = [(1, lambda x: x - 1), (2, lambda x: x / 2), (3, lambda x: x / 3)]
 
-    # Initialize variable to positive infinity
-    num_operations = float("inf")
-
     # Initialize operation count and number sequence dictionaries, add first value
     num_ops_dict = {1: 1}
     num_seq_dict = {1: [1]}
