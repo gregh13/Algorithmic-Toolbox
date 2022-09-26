@@ -13,7 +13,7 @@ def triple(n):
 def compute_operations(n):
 
     # Function list (plus 1, double, triple)
-    funct_list = [(1, lambda x: x - 1), (2, lambda x: x / 2), lambda x: x / 3]
+    funct_list = [(1, lambda x: x - 1), (2, lambda x: x / 2), (3, lambda x: x / 3)]
 
     num_operations = float("inf")
 
