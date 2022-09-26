@@ -11,8 +11,6 @@ def triple(n):
 
 
 def compute_operations(n):
-    # Initialize output list
-    output_seq = [1]
 
     # Function list (plus 1, double, triple)
     funct_list = [(1, lambda x: x - 1), (2, lambda x: x / 2), lambda x: x / 3]
@@ -31,14 +29,13 @@ def compute_operations(n):
             if number % funct[0] == 0:
                 prev_values = num_ops_dict[funct[1](number)]
                 num_operations = prev_values[0] + 1
-                output_seq = prev_values[1]
 
                 if num_operations < num_ops_dict[number]:
                     num_ops_dict[number][0] = num_operations
 
                     num_ops_dict[number][1] = prev_values[1] + [number]
 
-    return output_seq
+    return num_ops_dict[number][1]
 
 
 if __name__ == '__main__':
