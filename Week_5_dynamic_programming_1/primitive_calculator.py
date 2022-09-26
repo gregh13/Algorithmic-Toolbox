@@ -17,25 +17,24 @@ def compute_operations(n):
 
     num_operations = float("inf")
 
-    num_ops_dict = {1: (1, [1])}
+    num_ops_dict = {1: 1}
+    num_seq_dict = {1: [1]}
 
     for number in range(2, n + 1):
-        # Initialize output list
-        output_seq = [1]
 
-        num_ops_dict[number] = (float("inf"), output_seq)
+        num_ops_dict[number] = float("inf")
 
         for funct in funct_list:
             if number % funct[0] == 0:
-                prev_values = num_ops_dict[funct[1](number)]
-                num_operations = prev_values[0] + 1
+                prev_num_ops = num_ops_dict[funct[1](number)]
+                num_operations = prev_num_ops + 1
 
-                if num_operations < num_ops_dict[number][0]:
-                    num_ops_dict[number][0] = num_operations
+                if num_operations < num_ops_dict[number]:
+                    num_ops_dict[number] = num_operations
 
-                    num_ops_dict[number][1] = prev_values[1] + [number]
+                    num_seq_dict[number] = num_seq_dict[funct[1](number)] + [number]
 
-    return num_ops_dict[number][1]
+    return num_seq_dict[number]
 
 
 if __name__ == '__main__':
