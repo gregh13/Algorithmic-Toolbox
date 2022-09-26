@@ -17,13 +17,10 @@ def edit_distance(first_string, second_string):
             match = string_matrix[i-1][j-1]
             mismatch = string_matrix[i-1][j-1] + 1
 
-            print("Matrix before: ", string_matrix)
             if first_string[i] == second_string[j]:
                 string_matrix[i][j] = min(insertion, deletion, match)
             else:
                 string_matrix[i][j] = min(insertion, deletion, mismatch)
-            print("Matrix after: ", string_matrix)
-            print(f"Matrix[{i}][{j}]: ", string_matrix[i][j])
 
     return string_matrix[first_length-1][second_length-1]
 
