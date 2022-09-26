@@ -30,7 +30,7 @@ def compute_operations(n):
                 prev_values = num_ops_dict[funct[1](number)]
                 num_operations = prev_values[0] + 1
 
-                if num_operations < num_ops_dict[number]:
+                if num_operations < num_ops_dict[number][0]:
                     num_ops_dict[number][0] = num_operations
 
                     num_ops_dict[number][1] = prev_values[1] + [number]
