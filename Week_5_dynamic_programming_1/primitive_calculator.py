@@ -40,7 +40,7 @@ def compute_operations(n):
                     num_seq_dict[number] = num_seq_dict[funct[1](number)] + [number]
 
     # Catches edge case of n = 1
-    if n == 1:
+    if n <= 1:
         number = 1
     return num_seq_dict[number]
 
