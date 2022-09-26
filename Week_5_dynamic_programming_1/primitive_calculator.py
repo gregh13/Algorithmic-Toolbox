@@ -1,15 +1,3 @@
-def add_one(n):
-    return n + 1
-
-
-def double(n):
-    return n * 2
-
-
-def triple(n):
-    return n * 3
-
-
 def compute_operations(n):
 
     # Function list (plus 1, double, triple)
@@ -32,7 +20,7 @@ def compute_operations(n):
                 prev_num_ops = num_ops_dict[funct[1](number)]
                 num_operations = prev_num_ops + 1
 
-                # Check for number of operations, save smallest value
+                # Check for number of operations, save the smallest value
                 if num_operations < num_ops_dict[number]:
                     num_ops_dict[number] = num_operations
 
