@@ -1,8 +1,10 @@
 def add_one(n):
     return n + 1
 
+
 def double(n):
     return n * 2
+
 
 def triple(n):
     return n * 3
