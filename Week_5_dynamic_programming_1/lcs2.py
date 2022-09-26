@@ -5,7 +5,7 @@ def lcs2(first_sequence, second_sequence):
 
     # Create 2d matrix with first seq numbers as the columns and second seq numbers as the rows
     # Initialize all values to 0 as this will be our 'memory' array
-    seq_2d_array = [[0 for x in range(len(second_sequence))] for y in range(len(first_sequence))]
+    seq_2d_array = [[0 for x in range(second_length)] for y in range(first_length)]
 
     for j in range(1, second_length):
         points_to_add = 0
