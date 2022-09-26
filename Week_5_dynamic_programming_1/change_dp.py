@@ -5,7 +5,7 @@ def change(money):
     # Initialize num_coins to positive infinity
     num_coins = float("inf")
 
-    # Initialize dict for storing coin numbers
+    # Initialize dictionary for storing coin numbers
     min_num_coins = {0: 0}
 
     for m in range(1, money + 1):
