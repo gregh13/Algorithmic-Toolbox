@@ -33,7 +33,8 @@ def compute_operations(n):
                     num_ops_dict[number] = num_operations
 
                     num_seq_dict[number] = num_seq_dict[funct[1](number)] + [number]
-
+    if n == 1:
+        number = 1
     return num_seq_dict[number]
 
 
