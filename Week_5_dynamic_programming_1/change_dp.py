@@ -17,7 +17,11 @@ def change(money):
 
             # Check if able to add a coin without going over the money value
             if m >= coin_i:
+
+                # Update number of coins by adding one to the previous money amount's number of coins
                 num_coins = min_num_coins[m - coin_i] + 1
+
+                # Compare how different denominations change number of coins, save best value
                 if num_coins < min_num_coins[m]:
                     min_num_coins[m] = num_coins
 
