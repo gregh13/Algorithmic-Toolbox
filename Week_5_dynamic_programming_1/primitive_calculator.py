@@ -15,18 +15,28 @@ def compute_operations(n):
     output_seq = [1]
 
     # Function list (plus 1, double, triple)
-    funct_list = [lambda x: x + 1, lambda x: x * 2, lambda x: x * 3]
+    funct_list = [(1, lambda x: x - 1), (2, lambda x: x / 2), lambda x: x / 3]
 
     num_operations = float("inf")
 
-    min_number_ops = {0: 0}
+    num_ops_dict = {1: (1, [1])}
 
     for number in range(1, n + 1):
-        min_number_ops[number] = float("inf")
+        # Initialize output list
+        output_seq = [1]
+
+        num_ops_dict[number] = (float("inf"), output_seq)
 
         for funct in funct_list:
-            if number >= funct(output_seq[-1]):
-                num_operations = min_number_ops[output_seq[-1]] + 1
+            if number % funct[0] == 0:
+                prev_values = num_ops_dict[funct[1](number)]
+                num_operations = prev_values[0] + 1
+                output_seq = prev_values[1]
+
+                if num_operations < num_ops_dict[number]:
+                    num_ops_dict[number][0] = num_operations
+
+                    num_ops_dict[number][1] = prev_values[1] + [number]
 
     return output_seq
 
