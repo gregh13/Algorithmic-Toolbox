@@ -1,4 +1,6 @@
 def edit_distance(first_string, second_string):
+    first_string = "x" + first_string
+    second_string = "x" + second_string
     first_length = len(first_string)
     second_length = len(second_string)
 
@@ -6,7 +8,10 @@ def edit_distance(first_string, second_string):
     string_matrix = [[0 for x in range(second_length)] for y in range(first_length)]
 
     for j in range(1, second_length):
+        string_matrix[0][j] = j
         for i in range(1, first_length):
+            string_matrix[i][0] = i
+
             insertion = string_matrix[i][j-1] + 1
             deletion = string_matrix[i-1][j] + 1
             match = string_matrix[i-1][j-1]
@@ -18,6 +23,7 @@ def edit_distance(first_string, second_string):
             else:
                 string_matrix[i][j] = min(insertion, deletion, mismatch)
             print("Matrix after: ", string_matrix)
+            print(f"Matrix[{i}][{j}]: ", string_matrix[i][j])
 
     return string_matrix[first_length-1][second_length-1]
 
