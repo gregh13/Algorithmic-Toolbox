@@ -29,6 +29,8 @@ def lcs3(first_sequence, second_sequence, third_sequence):
 
             # Check if sequence count will be optimal:
             if sequence_count[i] < (sequence_count[j] + 1):
+
+                # Checks if index increases in each sequence
                 if all(x > y for x, y in zip(i_match, j_match)):
 
                     # Update sequence count to one more than the best recent count
