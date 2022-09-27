@@ -1,19 +1,15 @@
 def lcs2(first_sequence, second_sequence):
 
-    first_length = len(first_sequence)
-    second_length = len(second_sequence)
-
     index_match_list = []
-    for i in range(first_length):
-        for j in range(second_length):
+    for i in range(len(first_sequence)):
+        for j in range(len(second_sequence)):
             if first_sequence[i] == second_sequence[j]:
                 index_match_list.append((j, i))
 
     length_of_index_matches = len(index_match_list)
-    sequence_count = [0] * length_of_index_matches
+    sequence_count = [1] * length_of_index_matches
 
     for i in range(length_of_index_matches):
-        sequence_count[i] = 1
         for j in range(i):
             if index_match_list[j][0] < index_match_list[i][0] and sequence_count[i] < (sequence_count[j] + 1)\
                     and index_match_list[j][1] != index_match_list[i][1]:
