@@ -27,7 +27,13 @@ def lcs3(first_sequence, second_sequence, third_sequence):
                 # Update sequence count to one more than the best recent count
                 sequence_count[i] = sequence_count[j] + 1
 
-    return 0
+    # In case no matches and sequence_count is empty list
+    max_count = 0
+    if sequence_count:
+        max_count = max(sequence_count)
+    return max_count
+
+
 
 if __name__ == '__main__':
     n = int(input())
