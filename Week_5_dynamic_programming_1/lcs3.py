@@ -22,7 +22,7 @@ def lcs3(first_sequence, second_sequence, third_sequence):
         for j in range(i):
             j_match = match_list[j]
 
-            if j_match[0] < i_match[0] and sequence_count[i] < (sequence_count[j] + 1) \
+            if sequence_count[i] < (sequence_count[j] + 1) and j_match[0] < i_match[0]\
                     and j_match[1] < i_match[1] and j_match[2] < i_match[2]:
                 # Update sequence count to one more than the best recent count
                 sequence_count[i] = sequence_count[j] + 1
