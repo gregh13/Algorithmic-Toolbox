@@ -1,13 +1,14 @@
 def lcs3(first_sequence, second_sequence, third_sequence):
-    # Make set for faster verification in steps below
-    third_set = set(third_sequence)
 
+    first_sequence = [x for x in first_sequence if x in set(second_sequence) and x in set(third_sequence)]
+    second_sequence = [y for y in second_sequence if y in first_sequence]
+    third_sequence = [z for z in third_sequence if z in first_sequence]
     match_list = []
 
     # Compared sequences item by item, add any matches to list
     for i in range(len(first_sequence)):
         for j in range(len(second_sequence)):
-            if first_sequence[i] == second_sequence[j] and first_sequence[i] in third_set:
+            if first_sequence[i] == second_sequence[j]:
                 # Adds index of item in each sequence, used to eliminate duplicates in next step
                 match_list.append([first_sequence[i], j, i])
 
@@ -24,7 +25,6 @@ def lcs3(first_sequence, second_sequence, third_sequence):
 
     for i in range(match_list_length):
         for j in range(i):
-
             if match_list[j][1] < match_list[i][1] and sequence_count[i] < (sequence_count[j] + 1) \
                     and match_list[j][2] < match_list[i][2] and match_list[j][3] < match_list[i][3]:
                 # Update sequence count to one more than the best recent count
