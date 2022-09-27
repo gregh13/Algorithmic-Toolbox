@@ -27,12 +27,12 @@ def lcs3(first_sequence, second_sequence, third_sequence):
             # Grab value as is used multiple times below
             j_match = match_list[j]
 
-            # Check if sequence count will be optimal, then checks if index increases in each sequences
-            if sequence_count[i] < (sequence_count[j] + 1) and j_match[0] < i_match[0]\
-                    and j_match[1] < i_match[1] and j_match[2] < i_match[2]:
+            # Check if sequence count will be optimal:
+            if sequence_count[i] < (sequence_count[j] + 1):
+                if all(x > y for x, y in zip(i_match, j_match)):
 
-                # Update sequence count to one more than the best recent count
-                sequence_count[i] = sequence_count[j] + 1
+                    # Update sequence count to one more than the best recent count
+                    sequence_count[i] = sequence_count[j] + 1
 
     # In case no matches and sequence_count is empty list
     max_count = 0
