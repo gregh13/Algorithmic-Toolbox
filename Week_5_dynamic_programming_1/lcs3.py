@@ -14,7 +14,10 @@ def lcs3(first_sequence, second_sequence, third_sequence):
     for k in range(len(third_sequence)):
         for j in range(len(match_list)):
             if third_sequence[k] == match_list[j][0]:
-                match_list[j].append(k)
+                if len(match_list[j]) == 3:
+                    match_list[j].append(k)
+                else:
+                    match_list.append(match_list[j] + [k])
 
     match_list_length = len(match_list)
     sequence_count = [1] * match_list_length
@@ -23,7 +26,7 @@ def lcs3(first_sequence, second_sequence, third_sequence):
         for j in range(i):
 
             if match_list[j][1] < match_list[i][1] and sequence_count[i] < (sequence_count[j] + 1) \
-                    and match_list[j][2] != match_list[i][2] and match_list[j][3] != match_list[i][3]:
+                    and match_list[j][2] < match_list[i][2] and match_list[j][3] < match_list[i][3]:
                 # Update sequence count to one more than the best recent count
                 sequence_count[i] = sequence_count[j] + 1
 
