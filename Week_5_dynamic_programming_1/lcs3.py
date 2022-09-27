@@ -11,6 +11,10 @@ def lcs3(first_sequence, second_sequence, third_sequence):
                 # Adds index of item in each sequence, used to eliminate duplicates in next step
                 match_list.append([first_sequence[i], j, i])
 
+    for k in range(len(third_sequence)):
+        for j in range(len(match_list)):
+            if third_sequence[k] == match_list[j][0]:
+                match_list[j].append(k)
 
     return 0
 
