@@ -17,7 +17,10 @@ def lcs2(first_sequence, second_sequence):
             if index_match_list[j] < index_match_list[i] and sequence_count[i] < (sequence_count[j] + 1):
                 sequence_count[i] = sequence_count[j] + 1
 
-    return max(sequence_count)
+    max_count = 0
+    if sequence_count:
+        max_count = max(sequence_count)
+    return max_count
 
 
 if __name__ == '__main__':
