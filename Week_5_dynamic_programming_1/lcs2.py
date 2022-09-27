@@ -10,9 +10,10 @@ def lcs2(first_sequence, second_sequence):
                 index_match_list.append(j)
 
     length_of_index_matches = len(index_match_list)
-    sequence_count = [1] * length_of_index_matches
+    sequence_count = [None] * length_of_index_matches
 
     for i in range(length_of_index_matches):
+        sequence_count[i] = 1
         for j in range(i):
             if index_match_list[j] < index_match_list[i] and sequence_count[i] < (sequence_count[j] + 1):
                 sequence_count[i] = sequence_count[j] + 1
@@ -32,4 +33,6 @@ if __name__ == '__main__':
     b = list(map(int, input().split()))
     assert len(b) == m
 
-    print(lcs2(a, b))
+    answer1 = lcs2(a, b)
+    answer2 = lcs2(b, a)
+    print(min(answer1, answer2))
