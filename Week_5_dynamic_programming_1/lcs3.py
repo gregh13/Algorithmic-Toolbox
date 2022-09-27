@@ -7,18 +7,12 @@ def lcs3(first_sequence, second_sequence, third_sequence):
 
     # Compared sequences item by item, add any matches to list
     for i in range(len(first_sequence)):
+        first = first_sequence[i]
         for j in range(len(second_sequence)):
-            if first_sequence[i] == second_sequence[j]:
-                # Adds index of item in each sequence, used to eliminate duplicates in next step
-                match_list.append([first_sequence[i], j, i])
-
-    for k in range(len(third_sequence)):
-        for j in range(len(match_list)):
-            if third_sequence[k] == match_list[j][0]:
-                if len(match_list[j]) == 3:
-                    match_list[j].append(k)
-                else:
-                    match_list.append(match_list[j] + [k])
+            if first == second_sequence[j]:
+                for k in range(len(third_sequence)):
+                    if first == third_sequence[k]:
+                        match_list.append((j, i, k))
 
     match_list_length = len(match_list)
     sequence_count = [1] * match_list_length
