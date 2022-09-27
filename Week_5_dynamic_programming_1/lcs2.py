@@ -34,6 +34,4 @@ if __name__ == '__main__':
     b = list(map(int, input().split()))
     assert len(b) == m
 
-    answer1 = lcs2(a, b)
-    answer2 = lcs2(b, a)
-    print(min(answer1, answer2))
+    print(lcs2(a, b))
