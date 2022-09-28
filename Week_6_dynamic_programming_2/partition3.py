@@ -24,10 +24,10 @@ def partition3(values):
     ways_to_split = 3
     val_sum = sum(values)
     if val_sum % ways_to_split != 0:
-        return can_split_evenly
+        return int(can_split_evenly)
 
     if 0 < len(values) < ways_to_split:
-        return can_split_evenly
+        return int(can_split_evenly)
 
     share_value = val_sum / ways_to_split
 
@@ -38,7 +38,7 @@ def partition3(values):
         if not can_split_evenly:
             break
 
-    return can_split_evenly
+    return int(can_split_evenly)
 
 
 if __name__ == '__main__':
