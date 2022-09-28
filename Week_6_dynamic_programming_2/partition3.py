@@ -31,7 +31,7 @@ def partition3(values):
 
     share_value = val_sum / ways_to_split
 
-    values.sort()
+    values.sort(reverse=True)
     memoization_dict = {0: True}
     for n in range(ways_to_split):
         can_split_evenly = find_split(values, share_value)
