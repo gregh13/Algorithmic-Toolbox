@@ -7,13 +7,12 @@ def maximum_gold(capacity, weights):
             return memoization_dict[max_cap]
 
         memoization_dict[max_cap] = 0
-        for w in range(max_cap + 1):
-            for i in range(len(weight_list)):
-                val = 0
-                if weight_list[i] <= max_cap:
-                    val = choose_bar(max_cap - weight_list[i], weight_list[1:]) + 1
-                if val > memoization_dict[max_cap]:
-                    memoization_dict[max_cap] = val
+        for i in range(len(weight_list)):
+            val = 0
+            if weight_list[i] <= max_cap:
+                val = choose_bar(max_cap - weight_list[i], weight_list[1:]) + 1
+            if val > memoization_dict[max_cap]:
+                memoization_dict[max_cap] = val
 
         return memoization_dict[max_cap]
 
