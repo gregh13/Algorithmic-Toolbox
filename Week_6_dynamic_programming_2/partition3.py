@@ -10,7 +10,7 @@ def partition3(values):
         for i in range(len(value_list)):
             i_value = value_list[i]
             if i_value <= remaining_sum:
-                possible_path = find_split(value_list[1:], remaining_sum - i_value)
+                possible_path = find_split(value_list[:i] + value_list[i+1:], remaining_sum - i_value)
                 if possible_path:
                     break
                 else:
