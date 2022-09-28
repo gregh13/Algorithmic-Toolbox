@@ -6,13 +6,18 @@ def partition3(values):
         if remaining_sum in memoization_dict:
             return memoization_dict[remaining_sum]
 
-        val = 0
+        possible_path = False
         for i in range(len(value_list)):
             i_value = value_list[i]
             if i_value <= remaining_sum:
-                sequence = find_split(value_list[1:], remaining_sum - i_value) + i_value
+                possible_path = find_split(value_list[1:], remaining_sum - i_value)
+                if possible_path:
+                    break
+                else:
+                    continue
 
-
+        memoization_dict[remaining_sum] = possible_path
+        return possible_path
 
     can_split_evenly = False
 
@@ -27,11 +32,11 @@ def partition3(values):
     share_value = val_sum / ways_to_split
 
     values.sort()
-    memoization_dict = {0: 0}
+    memoization_dict = {0: True}
     for n in range(ways_to_split):
-        find_split(values, share_value)
-
-
+        can_split_evenly = find_split(values, share_value)
+        if not can_split_evenly:
+            break
 
     return can_split_evenly
 
