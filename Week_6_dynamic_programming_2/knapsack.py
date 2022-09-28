@@ -2,15 +2,15 @@ from sys import stdin
 
 
 def maximum_gold(capacity, weights):
-    def choose_bar(max_cap):
+    def choose_bar(max_cap, weight_list):
         if max_cap in memoization_dict:
             return memoization_dict[max_cap]
 
         max_cap_val = 0
-        for i in range(len(weights)):
-            weight_i = weights[i]
+        for i in range(len(weight_list)):
+            weight_i = weight_list[i]
             if weight_i <= max_cap:
-                val = choose_bar(max_cap - weight_i) + 1
+                val = choose_bar(max_cap - weight_i, (weight_list[:i] + weight_list[i+1:])) + 1
                 if val > max_cap_val:
                     max_cap_val = val
 
@@ -18,7 +18,7 @@ def maximum_gold(capacity, weights):
         return memoization_dict[max_cap]
 
     memoization_dict = {0: 0}
-    choose_bar(capacity)
+    choose_bar(capacity, weights)
     return memoization_dict[capacity]
 
 
