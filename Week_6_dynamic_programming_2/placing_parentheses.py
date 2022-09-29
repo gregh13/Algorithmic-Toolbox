@@ -6,17 +6,24 @@ def evaluate(a, b, op):
     elif op == '*':
         return a * b
     else:
+        print("Only  +  -  *  operators are allowed")
         assert False
 
 
 def find_min_max(i, j):
     min_value = float("-inf")
     max_value = float("inf")
-    print(min_value, max_value)
 
     for k in range(i, j - 1):
+        # Calculate all possible combinations of min and max values
         a = evaluate(maximum_vals[i][k], maximum_vals[k+1][j], operator_sequence[k])
-    return 0, 1
+        b = evaluate(maximum_vals[i][k], minimum_vals[k+1][j], operator_sequence[k])
+        c = evaluate(minimum_vals[i][k], maximum_vals[k+1][j], operator_sequence[k])
+        d = evaluate(minimum_vals[i][k], minimum_vals[k+1][j], operator_sequence[k])
+
+        min_value = min(min_value, a, b, c, d)
+        max_value = max(max_value, a, b, c, d)
+    return min_value, max_value
 
 
 def maximum_value(num_digits):
