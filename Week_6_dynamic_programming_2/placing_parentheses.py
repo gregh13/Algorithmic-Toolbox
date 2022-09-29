@@ -15,6 +15,10 @@ def find_min_max(i, j):
     max_value = float("-inf")
 
     for k in range(i, j - 1):
+        print(maximum_vals[i][k])
+        print(minimum_vals[i][k])
+        print(maximum_vals[k+1][j])
+        print(minimum_vals[k+1][j])
         # Calculate all possible combinations of min and max values
         a = evaluate(maximum_vals[i][k], maximum_vals[k+1][j], operator_sequence[k])
         b = evaluate(maximum_vals[i][k], minimum_vals[k+1][j], operator_sequence[k])
