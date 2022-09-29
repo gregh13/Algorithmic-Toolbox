@@ -10,8 +10,16 @@ def evaluate(a, b, op):
 
 
 def maximum_value(digits, operators):
-    print("Digits: ", digits)
-    print("Operators: ", operators)
+    number_of_digits = len(digits)
+    minimum_vals = [[None] * number_of_digits for x in range(number_of_digits)]
+    maximum_vals = [[None] * number_of_digits for x in range(number_of_digits)]
+    print(minimum_vals)
+    print(maximum_vals)
+    for i in range(number_of_digits):
+        minimum_vals[i][i] = digits[i]
+        maximum_vals[i][i] = digits[i]
+    print(minimum_vals)
+    print(maximum_vals)
     return 0
 
 
