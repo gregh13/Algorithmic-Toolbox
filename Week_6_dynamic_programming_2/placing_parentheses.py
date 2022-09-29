@@ -9,8 +9,9 @@ def evaluate(a, b, op):
         assert False
 
 
-def maximum_value(dataset):
-
+def maximum_value(digits, operators):
+    print("Digits: ", digits)
+    print("Operators: ", operators)
     return 0
 
 
@@ -21,6 +22,6 @@ if __name__ == "__main__":
     n = int(n_raw)
     assert float(n) == n_raw
 
+    digit_sequence, operator_sequence = input_data[0:2 * n + 1:2], input_data[1:2 * n:2]
 
-
-    print(maximum_value(input()))
+    print(maximum_value(digit_sequence, operator_sequence))
