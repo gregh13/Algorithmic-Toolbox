@@ -13,13 +13,18 @@ def maximum_value(digits, operators):
     number_of_digits = len(digits)
     minimum_vals = [[None] * number_of_digits for x in range(number_of_digits)]
     maximum_vals = [[None] * number_of_digits for x in range(number_of_digits)]
-    print(minimum_vals)
-    print(maximum_vals)
+    # print(minimum_vals)
+    # print(maximum_vals)
     for i in range(number_of_digits):
         minimum_vals[i][i] = digits[i]
         maximum_vals[i][i] = digits[i]
-    print(minimum_vals)
-    print(maximum_vals)
+    # print(minimum_vals)
+    # print(maximum_vals)
+    # Loops through all index pairs combos ( [0,0] [1,1] --> [0,3] [1,4] etc)
+    for s in range(number_of_digits - 1):
+        for i in range(number_of_digits - s):
+            j = i + s
+            minimum_vals[i][j], maximum_vals[i][j] = find_min_max(i, j)
     return 0
 
 
