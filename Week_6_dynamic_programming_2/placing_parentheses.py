@@ -47,7 +47,8 @@ def maximum_value(num_digits):
 
 
 if __name__ == "__main__":
-    input_data = list(input().split())
+    input_data = list(input())
+
     length = len(input_data)
     n_raw = (length - 1) / 2
     n = int(n_raw)
