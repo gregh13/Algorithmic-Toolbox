@@ -1,5 +1,4 @@
 def evaluate(a, b, op):
-    print(a, b, op)
     if op == '+':
         return a + b
     elif op == '-':
@@ -20,16 +19,13 @@ def find_min_max(i, j):
         max_value = maximum_vals[i][j]
 
     for k in range(i, j):
-        print(maximum_vals[i][k])
-        print(minimum_vals[i][k])
-        print(maximum_vals[k+1][j])
-        print(minimum_vals[k+1][j])
+
         # Calculate all possible combinations of min and max values
         a = evaluate(maximum_vals[i][k], maximum_vals[k+1][j], operator_sequence[k])
         b = evaluate(maximum_vals[i][k], minimum_vals[k+1][j], operator_sequence[k])
         c = evaluate(minimum_vals[i][k], maximum_vals[k+1][j], operator_sequence[k])
         d = evaluate(minimum_vals[i][k], minimum_vals[k+1][j], operator_sequence[k])
-        print("ABCD: ", a, b, c, d)
+
         min_value = min(min_value, a, b, c, d)
         max_value = max(max_value, a, b, c, d)
 
@@ -46,8 +42,7 @@ def maximum_value(num_digits):
         for i in range(num_digits - s):
             j = i + s
             minimum_vals[i][j], maximum_vals[i][j] = find_min_max(i, j)
-            print("Min_vals: ", minimum_vals)
-            print("Max_vals: ", maximum_vals)
+
     return maximum_vals[0][num_digits-1]
 
 
