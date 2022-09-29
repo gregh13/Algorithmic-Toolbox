@@ -9,6 +9,9 @@ def evaluate(a, b, op):
         assert False
 
 
+def find_min_max(start_index, end_index):
+    return 0, 1
+
 def maximum_value(digits, operators):
     number_of_digits = len(digits)
     minimum_vals = [[None] * number_of_digits for x in range(number_of_digits)]
@@ -25,7 +28,7 @@ def maximum_value(digits, operators):
         for i in range(number_of_digits - s):
             j = i + s
             minimum_vals[i][j], maximum_vals[i][j] = find_min_max(i, j)
-    return 0
+    return maximum_vals[0][number_of_digits-1]
 
 
 if __name__ == "__main__":
