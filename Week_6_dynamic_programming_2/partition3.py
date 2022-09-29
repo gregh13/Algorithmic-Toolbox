@@ -70,6 +70,7 @@ def partition3(values):
             # One possible path found, need to remove those items for the next iteration
             value_path = [int(key) for key, value in memoization_dict.items() if value is True]
             for i in range(1, len(value_path)):
+                # Calculate value of item in list, then remove from list
                 used_value = value_path[i] - value_path[i-1]
                 values.remove(used_value)
 
