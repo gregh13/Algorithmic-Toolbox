@@ -11,8 +11,8 @@ def evaluate(a, b, op):
 
 
 def find_min_max(i, j):
-    min_value = float("-inf")
-    max_value = float("inf")
+    min_value = float("inf")
+    max_value = float("-inf")
 
     for k in range(i, j - 1):
         # Calculate all possible combinations of min and max values
@@ -36,6 +36,8 @@ def maximum_value(num_digits):
         for i in range(num_digits - s):
             j = i + s
             minimum_vals[i][j], maximum_vals[i][j] = find_min_max(i, j)
+            print("Min_vals: ", minimum_vals)
+            print("Max_vals: ", maximum_vals)
     return maximum_vals[0][num_digits-1]
 
 
