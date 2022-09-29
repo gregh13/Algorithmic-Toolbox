@@ -1,4 +1,5 @@
 def evaluate(a, b, op):
+    print(a, b, op)
     if op == '+':
         return a + b
     elif op == '-':
@@ -11,10 +12,14 @@ def evaluate(a, b, op):
 
 
 def find_min_max(i, j):
-    min_value = float("inf")
-    max_value = float("-inf")
+    if i != j:
+        min_value = float("inf")
+        max_value = float("-inf")
+    else:
+        min_value = minimum_vals[i][j]
+        max_value = maximum_vals[i][j]
 
-    for k in range(i, j - 1):
+    for k in range(i, j):
         print(maximum_vals[i][k])
         print(minimum_vals[i][k])
         print(maximum_vals[k+1][j])
@@ -27,23 +32,23 @@ def find_min_max(i, j):
         print("ABCD: ", a, b, c, d)
         min_value = min(min_value, a, b, c, d)
         max_value = max(max_value, a, b, c, d)
+
     return min_value, max_value
 
 
 def maximum_value(num_digits):
     for i in range(num_digits):
-        minimum_vals[i][i] = digit_sequence[i]
-        maximum_vals[i][i] = digit_sequence[i]
+        minimum_vals[i][i] = int(digit_sequence[i])
+        maximum_vals[i][i] = int(digit_sequence[i])
 
     # Loops through all index pairs combos ( [0,0] [1,1] --> [0,3] [1,4] etc)
-    for s in range(num_digits - 1):
+    for s in range(num_digits):
         for i in range(num_digits - s):
             j = i + s
             minimum_vals[i][j], maximum_vals[i][j] = find_min_max(i, j)
-            # print("Min_vals: ", minimum_vals)
-            # print("Max_vals: ", maximum_vals)
+            print("Min_vals: ", minimum_vals)
+            print("Max_vals: ", maximum_vals)
     return maximum_vals[0][num_digits-1]
-
 
 
 if __name__ == "__main__":
